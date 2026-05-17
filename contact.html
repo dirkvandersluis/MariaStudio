@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Maria Studio</title>
+  <meta name="description" content="Neem contact op met Maria Studio. Bestellingen via Instagram DM, betaling via Tikkie.">
+
+  <meta property="og:title" content="Contact — Maria Studio">
+  <meta property="og:description" content="Neem contact op met Maria Studio. Bestellingen via Instagram DM, betaling via Tikkie.">
+  <meta property="og:image" content="img/og-image.svg">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="contact.html">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+</head>
+<body>
+
+  <a href="#main" class="skip-link">Ga naar inhoud</a>
+
+  <!-- NAVIGATIE -->
+  <nav class="site-nav" id="site-nav"></nav>
+
+  <!-- PAGINA-HEADER -->
+  <header class="page-header" id="main">
+    <h1 class="page-header__title">Neem contact op</h1>
+    <p class="page-header__subtitle">
+      Heb je een vraag of wil je een kaart bestellen? Ik hoor graag van je via Instagram.
+    </p>
+  </header>
+
+  <!-- CONTACT-SECTIE -->
+  <section class="contact-section">
+    <div class="contact-grid">
+
+      <!-- LINKS: contactinformatie -->
+      <div class="contact-info">
+        <p class="contact-info__label">Hoofdkanaal</p>
+        <a href="https://www.instagram.com/by.rosaliemaria"
+           target="_blank" rel="noopener noreferrer"
+           class="contact-info__handle">@by.rosaliemaria</a>
+
+        <p class="contact-info__note">
+          Bestellingen gaan via Instagram DM. Stuur me een berichtje en ik reageer zo snel mogelijk.
+        </p>
+
+        <span class="contact-info__tikkie">Betaling via Tikkie na bevestiging. Verzending is gratis.</span>
+
+        <a href="https://www.instagram.com/by.rosaliemaria"
+           target="_blank" rel="noopener noreferrer"
+           class="btn btn-primary contact-ig-btn">Stuur een berichtje</a>
+      </div>
+
+      <!-- RECHTS: persoonlijk ontwerp -->
+      <div class="pers-card">
+        <h2 class="pers-card__title">Persoonlijk ontwerp</h2>
+        <p class="pers-card__text">
+          Heb je zelf een idee voor een kaart? Dan kun je mij altijd een berichtje sturen!
+          Samen kunnen we kijken naar een persoonlijk ontwerp dat helemaal past bij jouw idee.
+          Daarna kun je de kaart ook bestellen.
+        </p>
+        <p class="pers-card__prijs">&euro; 6,00 per gepersonaliseerde kaart</p>
+        <button class="btn btn-secondary bestelling-btn"
+                data-naam="Gepersonaliseerde kaart"
+                data-prijs="6.00"
+                data-gepersonaliseerd="true">
+          Vraag een persoonlijk ontwerp aan
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer" id="site-footer"></footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/kaarten.js"></script>
+  <script src="js/instagram.js"></script>
+  <script src="js/mandje.js"></script>
+  <script src="js/components.js"></script>
+</body>
+</html>
