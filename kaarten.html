@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kaarten — Maria Studio</title>
+  <meta name="description" content="Alle handgemaakte kaarten van Maria Studio. Prijs: 4,00 per kaart. Verzending gratis.">
+
+  <meta property="og:title" content="Kaarten — Maria Studio">
+  <meta property="og:description" content="Alle handgemaakte kaarten van Maria Studio. Prijs: 4,00 per kaart. Verzending gratis.">
+  <meta property="og:image" content="img/og-image.svg">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="kaarten.html">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+</head>
+<body>
+
+  <a href="#main" class="skip-link">Ga naar inhoud</a>
+
+  <!-- NAVIGATIE -->
+  <nav class="site-nav" id="site-nav"></nav>
+
+  <!-- PAGINA-HEADER -->
+  <header class="page-header" id="main">
+    <h1 class="page-header__title">De kaarten</h1>
+    <p class="page-header__subtitle">
+      Elk kaartje is met de hand ontworpen. Prijs: &euro; 4,00 per kaart. Verzending gratis.
+    </p>
+    <p class="bemoediging-quote" id="bemoediging-quote" style="display:none">
+      "Want ik ben ervan overtuigd dat noch dood noch leven&hellip; ons kan scheiden van de liefde van God." &mdash; Romeinen 8:38-39
+    </p>
+  </header>
+
+  <!-- FILTERBALK -->
+  <div class="filter-bar" role="group" aria-label="Filter op categorie">
+    <button class="filter-btn active" data-filter="alles">Alles</button>
+    <button class="filter-btn" data-filter="verjaardag">Verjaardag</button>
+    <button class="filter-btn" data-filter="bemoediging">Christelijk</button>
+<button class="filter-btn" data-filter="liefde">Liefde</button>
+    <button class="filter-btn" data-filter="zomaar">Zomaar</button>
+  </div>
+
+  <!-- KAARTENRASTER -->
+  <section class="cards-section">
+    <!--
+      KAART TOEVOEGEN:
+      1. Zet kaart-N-voor.png en kaart-N-achter.png in de map img/
+      2. Voeg een object toe aan kaartData in js/kaarten.js
+      3. De kaart verschijnt automatisch op deze pagina
+    -->
+    <div class="cards-grid" id="cards-grid"></div>
+  </section>
+
+  <!-- PERSONALISATIE -->
+  <section class="custom-section">
+    <h2 class="custom-section__title">Eigen idee?</h2>
+    <p class="custom-section__text">
+      Heb je zelf een idee voor een kaart? Stuur me een berichtje en samen kijken we naar een
+      ontwerp dat helemaal past bij jouw idee. Een gepersonaliseerde kaart kost &euro; 6,00.
+      Verzending is gratis.
+    </p>
+    <button class="btn btn-primary bestelling-btn"
+            data-naam="Gepersonaliseerde kaart"
+            data-prijs="6.00"
+            data-gepersonaliseerd="true">
+      Bestel een persoonlijke kaart
+    </button>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer" id="site-footer"></footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/kaarten.js"></script>
+  <script src="js/instagram.js"></script>
+  <script src="js/mandje.js"></script>
+  <script src="js/components.js"></script>
+  <script>
+    const container = document.getElementById('cards-grid');
+    const placeholderKleuren = ['#E77E7A','#476048','#E6A69D','#8398C9','#E9E1B5','#E77E7A'];
+
+    function renderKaarten(filter) {
+      const gefilterd = kaartData.filter(k => !k.verborgen && (filter === 'alles' || k.categorie === filter));
+
+      if (gefilterd.length === 0) {
+        container.innerHTML = '<p class="cards-leeg">Geen kaarten gevonden in deze categorie.</p>';
+        return;
+      }
+
+      container.innerHTML = gefilterd.map((kaart, i) => `
+        <div class="card" data-category="${kaart.categorie}">
+          <a href="kaart-detail.html?id=${kaart.id}">
+            <div class="card-img-wrap">
+              <img src="${kaart.imgVoor}" alt="${kaart.naam}" loading="lazy" width="400" height="500">
+            </div>
+            <div class="card-info">
+              ${kaart.isMiniSet ? '<span class="badge-mini">4 mini-kaartjes</span>' : ''}
+              <h3>${kaart.naam}</h3>
+              <span class="card-price">&euro; ${kaart.prijs.toFixed(2).replace('.', ',')}</span>
+            </div>
+          </a>
+        </div>
+      `).join('');
+
+      // Fallback voor ontbrekende afbeeldingen
+      container.querySelectorAll('.card-img-wrap img').forEach((img, i) => {
+        img.addEventListener('error', function () {
+          const kleur = placeholderKleuren[i % placeholderKleuren.length];
+          this.style.display = 'none';
+          this.closest('.card-img-wrap').style.background = kleur;
+        });
+      });
+    }
+
+    const quote = document.getElementById('bemoediging-quote');
+
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        renderKaarten(filter);
+        if (quote) quote.style.display = filter === 'bemoediging' ? 'block' : 'none';
+      });
+    });
+
+    renderKaarten('alles');
+  </script>
+</body>
+</html>

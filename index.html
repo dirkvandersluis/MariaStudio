@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maria Studio — Handgemaakte kaarten</title>
+  <meta name="description" content="Handgemaakte kaarten met liefde gemaakt door Rosalie. Voor elk moment dat telt. Verzending gratis.">
+
+  <meta property="og:title" content="Maria Studio — Handgemaakte kaarten">
+  <meta property="og:description" content="Handgemaakte kaarten met liefde gemaakt door Rosalie. Voor elk moment dat telt. Verzending gratis.">
+  <meta property="og:image" content="img/og-image.svg">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="index.html">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+</head>
+<body>
+
+  <a href="#main" class="skip-link">Ga naar inhoud</a>
+
+  <!-- NAVIGATIE -->
+  <nav class="site-nav" id="site-nav"></nav>
+
+  <!-- HERO -->
+  <section class="hero" id="main">
+    <div class="hero__inner">
+      <img src="img/logo.png" alt="Maria Studio" class="hero-logo fade-up-1" width="280" height="140">
+      <p class="hero-brand-name fade-up-1">Maria Studio</p>
+      <div class="hero-kaarten" aria-hidden="true">
+        <img src="img/kaart-4-voor.png"  alt="" class="hero-kaart hero-kaart--1" width="180" height="225">
+        <img src="img/kaart-17-voor.png" alt="" class="hero-kaart hero-kaart--2" width="180" height="225">
+        <img src="img/kaart-6-voor.png"  alt="" class="hero-kaart hero-kaart--3" width="180" height="225">
+      </div>
+      <h1 class="hero__title fade-up-2">Handgemaakte kaarten, <br>met liefde gemaakt.</h1>
+      <p class="hero__subtitle fade-up-3">Voor elk moment dat telt. Verzending gratis.</p>
+      <a href="kaarten.html" class="hero-link fade-up-3">Bekijk de kaarten &rarr;</a>
+    </div>
+  </section>
+
+  <!-- OVER ROSALIE -->
+  <section class="about">
+    <div class="about__grid">
+
+      <div class="about__photo">
+        <img src="img/rosalie.jpg" alt="Rosalie Maria van der Sluis" class="rosalie-foto" width="420" height="520">
+      </div>
+
+      <div class="about__text">
+        <h2 class="section-title">Over Rosalie</h2>
+        <p class="quote-line">
+          Hi! Mijn naam is Rosalie Maria van der Sluis, ik ben 18 jaar oud en creativiteit is al
+          sinds ik een klein meisje ben een groot onderdeel van mijn leven.
+        </p>
+        <p>Mijn favoriete hobby's zijn tekenen, handletteren en schilderen.</p>
+        <p>
+          Door mijn creaties wil ik mensen bemoedigen en een beeld geven van wie God is, vooral
+          door middel van Bijbelteksten, quotes en persoonlijke boodschappen.
+        </p>
+        <p>
+          Mijn grootste droom is om mijn eigen kaarten te verkopen voor allerlei gelegenheden,
+          zoals verjaardagen, ziekte, bemoediging of gewoon een lief berichtje voor iemand die het
+          nodig heeft. Elke kaart wordt met veel liefde en aandacht ontworpen.
+        </p>
+        <a href="contact.html" class="hero-link">Neem contact op &rarr;</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- KAARTPREVIEW -->
+  <section class="preview-section">
+    <h2 class="section-title">Bekijk de kaarten</h2>
+    <div class="preview-grid" id="kaart-preview"></div>
+    <div class="preview-more">
+      <a href="kaarten.html" class="btn btn-secondary">Alle kaarten bekijken</a>
+    </div>
+  </section>
+
+  <!-- PERSONALISATIE BANNER -->
+  <section class="pers-banner">
+    <h2 class="pers-banner__title">Jouw idee, mijn pen.</h2>
+    <p class="pers-banner__text">
+      Heb je een eigen idee voor een kaart? Laat het me weten en ik maak iets dat helemaal bij
+      jou past. Een gepersonaliseerde kaart kost &euro; 6,00. Verzending is altijd gratis.
+    </p>
+    <a href="contact.html" class="btn btn-primary">
+      Bestel een persoonlijke kaart &rarr;
+    </a>
+  </section>
+
+  <!-- CTA-BANNER -->
+  <section class="cta-banner">
+    <p class="cta-banner__text">
+      Volg me op Instagram voor nieuwe kaarten en een kijkje achter de schermen.
+    </p>
+    <a href="https://www.instagram.com/by.rosaliemaria" target="_blank" rel="noopener noreferrer"
+       class="btn btn-white">
+      @by.rosaliemaria
+    </a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer" id="site-footer"></footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/kaarten.js"></script>
+  <script src="js/instagram.js"></script>
+  <script src="js/mandje.js"></script>
+  <script src="js/components.js"></script>
+  <script>
+    const previewIds = [4, 17, 6];
+    const preview = previewIds.map(id => kaartData.find(k => k.id === id)).filter(Boolean);
+    document.getElementById('kaart-preview').innerHTML = preview.map(kaart => `
+      <div class="card">
+        <a href="kaart-detail.html?id=${kaart.id}">
+          <div class="card-img-wrap">
+            <img src="${kaart.imgVoor}" alt="${kaart.naam}" loading="lazy" width="400" height="500">
+          </div>
+          <div class="card-info">
+            ${kaart.isMiniSet ? '<span class="badge-mini">4 mini-kaartjes</span>' : ''}
+            <h3>${kaart.naam}</h3>
+            <span class="card-price">&euro; ${kaart.prijs.toFixed(2).replace('.', ',')}</span>
+          </div>
+        </a>
+      </div>
+    `).join('');
+
+    // Fallback voor ontbrekende preview-afbeeldingen
+    document.querySelectorAll('#kaart-preview .card-img-wrap img').forEach(img => {
+      img.addEventListener('error', function () {
+        this.style.display = 'none';
+        this.closest('.card-img-wrap').style.background = '#E6A69D';
+      });
+    });
+
+    document.querySelectorAll('.hero-kaart').forEach(img => {
+      img.addEventListener('error', function () { this.style.display = 'none'; });
+    });
+  </script>
+</body>
+</html>

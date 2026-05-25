@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kaartdetail — Maria Studio</title>
+  <meta name="description" content="Kaartdetail — Maria Studio handgemaakte kaarten.">
+
+  <meta property="og:title" content="Kaartdetail — Maria Studio">
+  <meta property="og:description" content="Handgemaakte kaarten met liefde gemaakt door Rosalie.">
+  <meta property="og:image" content="img/og-image.svg">
+  <meta property="og:type" content="website">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+</head>
+<body>
+
+  <a href="#main" class="skip-link">Ga naar inhoud</a>
+
+  <!-- NAVIGATIE -->
+  <nav class="site-nav" id="site-nav"></nav>
+
+  <!-- KAART-DETAIL INHOUD (gevuld via JS) -->
+  <div id="detail-inhoud"></div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer" id="site-footer"></footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/kaarten.js"></script>
+  <script src="js/instagram.js"></script>
+  <script src="js/mandje.js"></script>
+  <script src="js/components.js"></script>
+  <script>
+    function openLightbox(src, alt) {
+      const bestaand = document.querySelector('.lightbox-overlay');
+      if (bestaand) bestaand.remove();
+
+      const overlay = document.createElement('div');
+      overlay.className = 'lightbox-overlay';
+      overlay.setAttribute('role', 'dialog');
+      overlay.setAttribute('aria-modal', 'true');
+      overlay.setAttribute('aria-label', 'Afbeelding vergroot');
+
+      const sluitBtn = document.createElement('button');
+      sluitBtn.className = 'lightbox-sluit';
+      sluitBtn.setAttribute('aria-label', 'Sluiten');
+      sluitBtn.textContent = '✕';
+
+      const img = document.createElement('img');
+      img.setAttribute('src', src);
+      img.setAttribute('alt', alt);
+
+      overlay.appendChild(sluitBtn);
+      overlay.appendChild(img);
+
+      overlay.addEventListener('click', e => {
+        if (e.target === overlay || e.target.classList.contains('lightbox-sluit')) {
+          overlay.remove();
+        }
+      });
+      document.body.appendChild(overlay);
+      sluitBtn.focus();
+    }
+
+    function wisselAfbeelding(src, alt, gekliktElement) {
+      const hoofd = document.getElementById('detail-hoofd-img');
+      hoofd.src = src;
+      hoofd.alt = alt;
+      document.querySelectorAll('.detail-thumb').forEach(t => t.classList.remove('actief'));
+      gekliktElement.classList.add('actief');
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    const idRaw  = params.get('id');
+    const id     = idRaw !== null ? parseInt(idRaw, 10) : NaN;
+    const kaart  = !isNaN(id) ? kaartData.find(k => k.id === id) : null;
+    const inhoud = document.getElementById('detail-inhoud');
+
+    if (!kaart) {
+      inhoud.innerHTML = `
+        <div class="detail-fout">
+          <h2>Kaart niet gevonden</h2>
+          <p>Deze kaart bestaat niet of is verwijderd.</p>
+          <a href="kaarten.html" class="btn btn-primary">Bekijk alle kaarten</a>
+        </div>
+      `;
+    } else {
+      document.title = `${kaart.naam} — Maria Studio`;
+
+      // Open Graph dynamisch updaten
+      document.querySelector('meta[property="og:title"]').setAttribute('content', `${kaart.naam} — Maria Studio`);
+      document.querySelector('meta[property="og:description"]').setAttribute('content', kaart.beschrijving);
+      document.querySelector('meta[property="og:image"]').setAttribute('content', kaart.imgVoor);
+
+      // Canonical dynamisch
+      let canonical = document.querySelector('link[rel="canonical"]');
+      if (!canonical) { canonical = document.createElement('link'); canonical.rel = 'canonical'; document.head.appendChild(canonical); }
+      canonical.href = `kaart-detail.html?id=${kaart.id}`;
+
+      // JSON-LD
+      const ld = document.createElement('script');
+      ld.type = 'application/ld+json';
+      ld.textContent = JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": kaart.naam,
+        "image": kaart.imgVoor,
+        "description": kaart.beschrijving,
+        "offers": {
+          "@type": "Offer",
+          "price": kaart.prijs.toFixed(2),
+          "priceCurrency": "EUR",
+          "availability": "https://schema.org/InStock"
+        }
+      });
+      document.head.appendChild(ld);
+
+      const pillKlassen = {
+        verjaardag:  'pill-verjaardag',
+        bemoediging: 'pill-bemoediging',
+        liefde:      'pill-liefde',
+        zomaar:      'pill-zomaar',
+        moeder:      'pill-moeder'
+      };
+      const pillKlasse     = pillKlassen[kaart.categorie] || 'pill-bemoediging';
+      const categorieLabel = kaart.categorie.charAt(0).toUpperCase() + kaart.categorie.slice(1);
+
+      const miniSetBlok = kaart.isMiniSet ? `
+        <div class="detail-miniset-info">
+          Je ontvangt ${kaart.aantalInSet} losse mini-kaartjes, al uitgeknipt. Elk kaartje is 5,85 x 9,1 cm, een kwart van een normaal kaartformaat.
+        </div>
+      ` : '';
+
+      inhoud.innerHTML = `
+        <section class="detail-section" id="main">
+          <div class="detail-grid">
+
+            <div class="detail-images">
+              <img
+                id="detail-hoofd-img"
+                src="${kaart.imgVoor}"
+                alt="Voorkant: ${kaart.naam}"
+                class="detail-main-img"
+                loading="lazy"
+                width="400" height="500"
+              >
+
+              <div class="detail-thumbnail-row">
+                <div class="detail-thumb-wrap">
+                  <img
+                    src="${kaart.imgVoor}"
+                    alt="Voorkant"
+                    class="detail-thumb actief"
+                    loading="lazy"
+                    width="160" height="200"
+                    data-src="${kaart.imgVoor}"
+                    data-alt="Voorkant: ${kaart.naam}"
+                  >
+                  <span class="detail-thumb-label">Voorkant</span>
+                </div>
+                <div class="detail-thumb-wrap">
+                  <img
+                    src="${kaart.imgAchter}"
+                    alt="Achterkant"
+                    class="detail-thumb"
+                    loading="lazy"
+                    width="160" height="200"
+                    data-src="${kaart.imgAchter}"
+                    data-alt="Achterkant: ${kaart.naam}"
+                  >
+                  <span class="detail-thumb-label">Achterkant &mdash; beschrijfbaar</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="detail-info">
+              <p class="detail-breadcrumb"><a href="kaarten.html">Kaarten</a> / ${kaart.naam}</p>
+
+              <span class="detail-pill ${pillKlasse}">${categorieLabel}</span>
+              <h1 class="detail-naam">${kaart.naam}</h1>
+
+              <p class="detail-prijs-groot">&euro; ${kaart.prijs.toFixed(2).replace('.', ',')}</p>
+              <p class="detail-meta">Formaat: ${kaart.formaat}</p>
+              <p class="detail-meta">Verzending: gratis</p>
+
+              <hr class="detail-divider">
+
+              <p class="detail-beschrijving">${kaart.beschrijving}</p>
+
+              ${miniSetBlok}
+
+              <hr class="detail-divider">
+
+              <div class="detail-actions">
+                <button class="btn-cart" id="btn-cart-detail">
+                  Voeg toe aan mandje
+                </button>
+                <button class="btn-snel" id="btn-snel-detail">
+                  Snel bestellen
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </section>
+      `;
+
+      // Event listeners voor actie-knoppen (geen inline onclick)
+      document.getElementById('btn-cart-detail').addEventListener('click', () => voegToeAanMandje(kaart.id));
+      document.getElementById('btn-snel-detail').addEventListener('click', () =>
+        toonBestellingPopup(kaart.naam, kaart.prijs, false)
+      );
+
+      // Thumbnail klikken
+      document.querySelectorAll('.detail-thumb').forEach(thumb => {
+        thumb.addEventListener('click', function () {
+          wisselAfbeelding(this.dataset.src, this.dataset.alt, this);
+        });
+      });
+
+      // Hoofdafbeelding lightbox
+      document.getElementById('detail-hoofd-img').addEventListener('click', function () {
+        openLightbox(this.src, this.alt);
+      });
+
+      // Fallback voor ontbrekende afbeeldingen
+      document.querySelectorAll('.detail-main-img, .detail-thumb').forEach(img => {
+        img.addEventListener('error', function () {
+          this.style.display = 'none';
+          if (this.closest('.detail-thumb-wrap')) {
+            this.closest('.detail-thumb-wrap').style.display = 'none';
+          }
+        });
+      });
+    }
+  </script>
+</body>
+</html>
