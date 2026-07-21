@@ -24,7 +24,7 @@ function toonBestellingPopup(kaartnaam, prijs, gepersonaliseerd) {
     <div class="dm-popup">
       <button class="dm-sluit" aria-label="Sluiten">&#x2715;</button>
       <p class="dm-titel">Bijna klaar!</p>
-      <p class="dm-uitleg">Kopieer dit bericht en stuur het via Instagram DM naar <strong>@${INSTAGRAM_HANDLE}</strong>. Verzending is gratis.</p>
+      <p class="dm-uitleg">Kopieer dit bericht en stuur het via Instagram DM naar <strong>@${INSTAGRAM_HANDLE}</strong>. Verzendkosten hoor je bij de bevestiging, gratis vanaf &euro; 40,00.</p>
       <div class="dm-bericht" id="dm-tekst">${bericht}</div>
       <button class="dm-kopieer" id="dm-kopieer-btn">Kopieer bericht</button>
       <a href="${INSTAGRAM_URL}" target="_blank" rel="noopener noreferrer" class="dm-naar-insta">Ga naar Instagram &rarr;</a>

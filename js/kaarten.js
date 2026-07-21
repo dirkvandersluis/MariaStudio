@@ -6,7 +6,7 @@ const kaartData = [
     beschrijving: "Een bemoedigende kaart met handlettering op een felrode achtergrond. Met een gelijnde achterkant om zelf een persoonlijk berichtje te schrijven.",
     imgVoor: "img/kaart-1-voor.png",
     imgAchter: "img/kaart-1-achter.png",
-    prijs: 4.00,
+    prijs: 2.50,
     gepersonaliseerd: false,
     formaat: "11,7 x 18,2 cm"
   },
@@ -17,7 +17,7 @@ const kaartData = [
     beschrijving: "Een vrolijke verjaardagskaart met kleurrijke letters en een slingerillustratie op bordeauxrode achtergrond. Met gelijnde achterkant.",
     imgVoor: "img/kaart-2-voor.png",
     imgAchter: "img/kaart-2-achter.png",
-    prijs: 4.00,
+    prijs: 2.50,
     gepersonaliseerd: false,
     formaat: "11,7 x 18,2 cm"
   },
@@ -28,7 +28,7 @@ const kaartData = [
     beschrijving: "Een speelse kaart met kleurrijke handlettering op felroze achtergrond. Met gelijnde achterkant om zelf iets bij te schrijven.",
     imgVoor: "img/kaart-3-voor.png",
     imgAchter: "img/kaart-3-achter.png",
-    prijs: 4.00,
+    prijs: 2.50,
     gepersonaliseerd: false,
     formaat: "11,7 x 18,2 cm"
   },
@@ -39,7 +39,7 @@ const kaartData = [
     beschrijving: "Een stijlvolle kaart met Psalm 23 op een vrolijk gestreepte achtergrond in roze en groen. Met lichtroze gelijnde achterkant.",
     imgVoor: "img/kaart-4-voor.png",
     imgAchter: "img/kaart-4-achter.png",
-    prijs: 4.00,
+    prijs: 2.50,
     gepersonaliseerd: false,
     formaat: "11,7 x 18,2 cm"
   },
@@ -50,7 +50,7 @@ const kaartData = [
     beschrijving: "Een lieve kaart met een schaapje, gebaseerd op de gelijkenis van het verloren schaap. Met hot pink rand en gelijnde achterkant.",
     imgVoor: "img/kaart-5-voor.png",
     imgAchter: "img/kaart-5-achter.png",
-    prijs: 4.00,
+    prijs: 2.50,
     gepersonaliseerd: false,
     formaat: "11,7 x 18,2 cm"
   },
@@ -61,7 +61,7 @@ const kaartData = [
     beschrijving: "Een bemoedigende kaart met handlettering en een sierlijk kader op felroze achtergrond. Gebaseerd op Romeinen 8:31. Met een koraalrode gelijnde achterkant om zelf een persoonlijk berichtje te schrijven.",
     imgVoor: "img/kaart-6-voor.png",
     imgAchter: "img/kaart-6-achter.png",
-    prijs: 4.00,
+    prijs: 2.50,
     gepersonaliseerd: false,
     formaat: "11,7 x 18,2 cm"
   },
@@ -72,7 +72,7 @@ const kaartData = [
     beschrijving: "Een lieve kaart met een gele envelop, handgeschreven 'I love you so much' en blauwe bloemen op een felrode achtergrond. Met lichtroze gelijnde achterkant.",
     imgVoor: "img/kaart-7-voor.png",
     imgAchter: "img/kaart-7-achter.png",
-    prijs: 4.00,
+    prijs: 2.50,
     gepersonaliseerd: false,
     formaat: "11,7 x 18,2 cm"
   },
@@ -83,7 +83,7 @@ const kaartData = [
     beschrijving: "Een vrolijke kaart met een groene retro koelkast met gele en rode post-its op een felrode achtergrond. Met lichtroze gelijnde achterkant.",
     imgVoor: "img/kaart-8-voor.png",
     imgAchter: "img/kaart-8-achter.png",
-    prijs: 4.00,
+    prijs: 2.50,
     gepersonaliseerd: false,
     formaat: "11,7 x 18,2 cm"
   },
@@ -94,7 +94,7 @@ const kaartData = [
     beschrijving: "Een elegante kaart met een roze kandelaar met drie brandende kaarsen op een zachte gele achtergrond. Met lichtroze gelijnde achterkant.",
     imgVoor: "img/kaart-9-voor.png",
     imgAchter: "img/kaart-9-achter.png",
-    prijs: 4.00,
+    prijs: 2.50,
     gepersonaliseerd: false,
     formaat: "11,7 x 18,2 cm"
   },
@@ -105,7 +105,7 @@ const kaartData = [
     beschrijving: "Een stijlvolle kaart met een gouden lijntekening van een grachtenpand op een felrode achtergrond. Met lichtroze gelijnde achterkant.",
     imgVoor: "img/kaart-10-voor.png",
     imgAchter: "img/kaart-10-achter.png",
-    prijs: 4.00,
+    prijs: 2.50,
     gepersonaliseerd: false,
     formaat: "11,7 x 18,2 cm"
   },
@@ -116,7 +116,7 @@ const kaartData = [
     beschrijving: "Een vrolijke kaart voor een bijzondere moeder. 'Mumderful' in een sierlijk roze kader op een rood-roze gestreepte achtergrond. Met felrode gelijnde achterkant.",
     imgVoor: "img/kaart-11-voor.png",
     imgAchter: "img/kaart-11-achter.png",
-    prijs: 4.00,
+    prijs: 2.50,
     gepersonaliseerd: false,
     formaat: "11,7 x 18,2 cm"
   },
@@ -127,7 +127,7 @@ const kaartData = [
     beschrijving: "Een vrolijke kaart met een dicht blauw bloemenpatroon over de hele kaart op een felrode achtergrond. Met felrode gelijnde achterkant.",
     imgVoor: "img/kaart-12-voor.png",
     imgAchter: "img/kaart-12-achter.png",
-    prijs: 4.00,
+    prijs: 2.50,
     gepersonaliseerd: false,
     formaat: "11,7 x 18,2 cm"
   },
@@ -138,7 +138,7 @@ const kaartData = [
     beschrijving: "Een rustgevende kaart met handlettering en een schommelstoel illustratie op bordeauxrode achtergrond. Met lichtroze gelijnde achterkant.",
     imgVoor: "img/kaart-13-voor.png",
     imgAchter: "img/kaart-13-achter.png",
-    prijs: 4.00,
+    prijs: 2.50,
     gepersonaliseerd: false,
     formaat: "11,7 x 18,2 cm"
   },
@@ -149,7 +149,7 @@ const kaartData = [
     beschrijving: "Een krachtige kaart met roze handlettering op een donkere bordeauxrode achtergrond. Met bordeauxrode gelijnde achterkant.",
     imgVoor: "img/kaart-14-voor.png",
     imgAchter: "img/kaart-14-achter.png",
-    prijs: 4.00,
+    prijs: 2.50,
     gepersonaliseerd: false,
     formaat: "11,7 x 18,2 cm"
   },
@@ -160,7 +160,7 @@ const kaartData = [
     beschrijving: "Een romantische kaart met roze handlettering in een groot hart op een donkerblauwe achtergrond. Met bordeauxpaarse gelijnde achterkant.",
     imgVoor: "img/kaart-15-voor.png",
     imgAchter: "img/kaart-15-achter.png",
-    prijs: 4.00,
+    prijs: 2.50,
     gepersonaliseerd: false,
     formaat: "11,7 x 18,2 cm"
   },
@@ -171,7 +171,7 @@ const kaartData = [
     beschrijving: "Een set van 4 mini-kaartjes, elk een kwart van een normaal kaartformaat (5,85 x 9,1 cm). De set bevat: 'Sit with Jesus', 'And if not, He is still good', 'You, Lord, are a shield around me (Psalm 3:3)' en 'Jesus first'. Je ontvangt 4 losse mini-kaartjes, al uitgeknipt en klaar om te versturen.",
     imgVoor: "img/kaart-16-voor.png",
     imgAchter: "img/kaart-16-achter.png",
-    prijs: 4.00,
+    prijs: 2.50,
     gepersonaliseerd: false,
     isMiniSet: true,
     aantalInSet: 4,
@@ -184,16 +184,149 @@ const kaartData = [
     beschrijving: "Een bemoedigende kaart met rode handlettering en een illustratie van een schaal met brood en vis op een zachte gele achtergrond.",
     imgVoor: "img/kaart-17-voor.png",
     imgAchter: "img/kaart-17-achter.png",
-    prijs: 4.00,
+    prijs: 2.50,
     gepersonaliseerd: false,
+    formaat: "11,7 x 18,2 cm"
+  },
+  {
+    id: 18,
+    naam: "I will climb this mountain with my eyes fixed only on You",
+    categorie: "bemoediging",
+    beschrijving: "Een bemoedigende kaart met fijne handlettering in rosegoud op een diep donkerbruine achtergrond. Voor iemand die voor een zware opgave staat. Met gelijnde achterkant om zelf een berichtje te schrijven.",
+    imgVoor: "img/kaart-18-voor.png",
+    imgAchter: "img/kaart-18-achter.png",
+    prijs: 2.50,
+    gepersonaliseerd: false,
+    formaat: "11,7 x 18,2 cm"
+  },
+  {
+    id: 19,
+    naam: "Vul dit huis met Uw glorie",
+    categorie: "zomaar",
+    beschrijving: "Een warme kaart met bruin krulschrift op koraalrood. Mooi als kaart bij een verhuizing, een nieuwe woning of een housewarming. Met gelijnde achterkant.",
+    imgVoor: "img/kaart-19-voor.png",
+    imgAchter: "img/kaart-19-achter.png",
+    prijs: 2.50,
+    gepersonaliseerd: false,
+    formaat: "11,7 x 18,2 cm"
+  },
+  {
+    id: 21,
+    naam: "Here I am Lord, send me",
+    categorie: "bemoediging",
+    beschrijving: "Een kaart met roze handlettering en de omtrek van Zuid-Afrika op olijfbruin. Gemaakt voor wie op zending gaat of een nieuwe roeping volgt. Met gelijnde achterkant.",
+    imgVoor: "img/kaart-21-voor.png",
+    imgAchter: "img/kaart-21-achter.png",
+    prijs: 2.50,
+    gepersonaliseerd: false,
+    formaat: "11,7 x 18,2 cm"
+  },
+  {
+    id: 22,
+    naam: "Everything I have I owe to God",
+    categorie: "bemoediging",
+    beschrijving: "Een kaart met een patroon van zes roze sierkruisen op donkerbruin, met de tekst onderaan. Een stille kaart over dankbaarheid. Met gelijnde achterkant.",
+    imgVoor: "img/kaart-22-voor.png",
+    imgAchter: "img/kaart-22-achter.png",
+    prijs: 2.50,
+    gepersonaliseerd: false,
+    formaat: "11,7 x 18,2 cm"
+  },
+  {
+    id: 23,
+    naam: "Hineni",
+    categorie: "bemoediging",
+    beschrijving: "Het Hebreeuwse woord voor 'hier ben ik' uit Genesis 22, in groot roze schrift op bijna zwart groen. Over beschikbaar zijn voor God. Met gelijnde achterkant.",
+    imgVoor: "img/kaart-23-voor.png",
+    imgAchter: "img/kaart-23-achter.png",
+    prijs: 2.50,
+    gepersonaliseerd: false,
+    formaat: "11,7 x 18,2 cm"
+  },
+  {
+    id: 24,
+    naam: "Hoogbouw",
+    categorie: "zomaar",
+    beschrijving: "Een strakke kaart met een witte lijntekening van een torenflat op diepgroen. Zonder tekst, dus je kunt hem voor elke gelegenheid gebruiken. Met gelijnde achterkant.",
+    imgVoor: "img/kaart-24-voor.png",
+    imgAchter: "img/kaart-24-achter.png",
+    prijs: 2.50,
+    gepersonaliseerd: false,
+    formaat: "11,7 x 18,2 cm"
+  },
+  {
+    id: 25,
+    naam: "Heer, wijs mij Uw weg",
+    categorie: "bemoediging",
+    beschrijving: "Dun koperkleurig schrift op donkerblauw. Een ingetogen kaart voor iemand die voor een keuze staat, bijvoorbeeld bij een studiekeuze of een nieuwe stap. Met gelijnde achterkant.",
+    imgVoor: "img/kaart-25-voor.png",
+    imgAchter: "img/kaart-25-achter.png",
+    prijs: 2.50,
+    gepersonaliseerd: false,
+    formaat: "11,7 x 18,2 cm"
+  },
+  {
+    id: 26,
+    naam: "U bent met al mijn wegen vertrouwd",
+    categorie: "bemoediging",
+    beschrijving: "Psalm 139 in roze kwastschrift op olijfbruin. Een kaart die troost geeft aan iemand die het even niet meer weet. Met gelijnde achterkant.",
+    imgVoor: "img/kaart-26-voor.png",
+    imgAchter: "img/kaart-26-achter.png",
+    prijs: 2.50,
+    gepersonaliseerd: false,
+    formaat: "11,7 x 18,2 cm"
+  },
+  {
+    id: 27,
+    naam: "Bloemenpatroon",
+    categorie: "zomaar",
+    beschrijving: "Een vrolijke kaart met een doorlopend blauw bloemenpatroon op karmijnrood. Zonder tekst, dus geschikt voor elk moment. Met gelijnde achterkant.",
+    imgVoor: "img/kaart-27-voor.jpg",
+    imgAchter: "img/kaart-27-achter.png",
+    prijs: 2.50,
+    gepersonaliseerd: false,
+    formaat: "11,7 x 18,2 cm"
+  },
+  {
+    id: 28,
+    naam: "Stadsgezicht",
+    categorie: "zomaar",
+    beschrijving: "Een grafische kaart met een witte lijntekening van kantoorgebouwen op diepgroen. Zonder tekst. Met gelijnde achterkant.",
+    imgVoor: "img/kaart-28-voor.jpg",
+    imgAchter: "img/kaart-28-achter.png",
+    prijs: 2.50,
+    gepersonaliseerd: false,
+    formaat: "11,7 x 18,2 cm"
+  },
+  {
+    id: 31,
+    naam: "Rotterdam",
+    categorie: "zomaar",
+    beschrijving: "Een zwart-wit foto van de Rotterdamse kop van Zuid met een roze ingekleurde watertaxi op de Maas. Met gelijnde achterkant.",
+    imgVoor: "img/kaart-31-voor.jpg",
+    imgAchter: "img/kaart-31-achter.png",
+    prijs: 2.50,
+    gepersonaliseerd: false,
+    verborgen: true,
     formaat: "11,7 x 18,2 cm"
   }
 ];
 
 /*
   KAART TOEVOEGEN:
-  1. Zet de foto's in img/ als kaart-7-voor.png en kaart-7-achter.png
+  1. Zet de foto's in img/ als kaart-N-voor.png en kaart-N-achter.png
   2. Kopieer een object hierboven en pas id, naam, categorie, beschrijving en imgVoor/imgAchter aan
-  3. prijs is altijd 4.00, tenzij het een gepersonaliseerde kaart is (dan 6.00)
-  4. De kaart verschijnt automatisch op kaarten.html en is klikbaar naar kaart-detail.html?id=7
+  3. prijs is altijd 2.50, tenzij het een gepersonaliseerde kaart is (dan 6.00)
+  4. De kaart verschijnt automatisch op kaarten.html en is klikbaar naar kaart-detail.html?id=N
+  5. Zet verborgen: true om een kaart tijdelijk uit de winkel te halen zonder hem te verwijderen
+
+  LET OP bij de nieuwe kaarten van juli 2026:
+  - De ids 20, 29 en 30 zijn bewust overgeslagen. De bijbehorende afbeeldingen in img/
+    zijn opnieuw ingescande versies van kaarten die al bestonden als id 17, 13 en 3.
+    Ze zijn niet als los product toegevoegd om dubbele listings te voorkomen.
+  - Kaart 27, 28 en 31 hebben een .jpg voorkant in plaats van .png. Als PNG bleven ze
+    boven de 300kb. De achterkanten zijn wel .png.
+  - Kaart 31 (Rotterdam) staat op verborgen: true. Dit is een stadsfoto met het logo van
+    vastgoedbedrijf DHG erop en hoort waarschijnlijk niet in de collectie. Overleg met
+    Rosalie voordat je verborgen weghaalt.
 */

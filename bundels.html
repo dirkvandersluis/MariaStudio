@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bundels &mdash; Maria Studio</title>
+  <meta name="description" content="Themasets van vijf kaarten, zelf tien kaarten kiezen of een variety box van vijftien. Voordeliger dan los. Gratis verzending vanaf 40 euro.">
+
+  <meta property="og:title" content="Bundels &mdash; Maria Studio">
+  <meta property="og:description" content="Themasets van vijf kaarten, zelf tien kaarten kiezen of een variety box van vijftien. Voordeliger dan los.">
+  <meta property="og:image" content="img/og-image.svg">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="bundels.html">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+</head>
+<body>
+
+  <a href="#main" class="skip-link">Ga naar inhoud</a>
+
+  <!-- NAVIGATIE -->
+  <nav class="site-nav" id="site-nav"></nav>
+
+  <!-- PAGINA-HEADER -->
+  <header class="page-header" id="main">
+    <h1 class="page-header__title">Bundels</h1>
+    <p class="page-header__subtitle">
+      Meerdere kaarten tegelijk is voordeliger dan los. Een losse kaart kost &euro; 2,50,
+      in een bundel betaal je vanaf &euro; 2,00 per kaart.
+    </p>
+  </header>
+
+  <!-- VERZENDINFO -->
+  <section class="verzend-balk" aria-label="Verzendinformatie">
+    <div class="verzend-balk__inner" id="verzend-balk"></div>
+  </section>
+
+  <!-- BUNDELS -->
+  <section class="bundels-section">
+    <div class="bundels-grid" id="bundels-grid"></div>
+  </section>
+
+  <!-- UITLEG -->
+  <section class="custom-section">
+    <h2 class="custom-section__title">Hoe werkt bestellen?</h2>
+    <p class="custom-section__text">
+      Zet je bundel in het mandje en open het mandje rechtsboven. Daar staat een kant-en-klaar
+      bericht dat je kopieert en naar Rosalie stuurt via Instagram. Zij bevestigt of alles op
+      voorraad is en stuurt daarna een Tikkie. Pas als je betaalt gaat de bestelling op de post.
+    </p>
+    <a href="kaarten.html" class="btn btn-secondary">Bekijk eerst alle kaarten</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer" id="site-footer"></footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/kaarten.js"></script>
+  <script src="js/bundels.js"></script>
+  <script src="js/instagram.js"></script>
+  <script src="js/mandje.js"></script>
+  <script src="js/components.js"></script>
+  <script>
+    const eur = b => b.toFixed(2).replace('.', ',');
+    const zichtbareKaarten = kaartData.filter(k => !k.verborgen);
+
+    /* ---- VERZENDBALK ---------------------------------------------------- */
+    document.getElementById('verzend-balk').innerHTML = `
+      <p class="verzend-balk__hoofd">Gratis verzending vanaf &euro; ${eur(VERZENDING.GRATIS_VANAF)}</p>
+      <p class="verzend-balk__detail">
+        Daaronder rekenen we het PostNL-tarief door:
+        &euro; ${eur(VERZENDING.BRIEFPOST)} voor 1 tot en met ${VERZENDING.KAARTEN_VOOR_PAKJE - 1} kaarten,
+        &euro; ${eur(VERZENDING.BRIEVENBUSPAKJE)} voor ${VERZENDING.KAARTEN_VOOR_PAKJE} kaarten of meer als brievenbuspakje.
+      </p>
+    `;
+
+    /* ---- BUNDELKAARTEN -------------------------------------------------- */
+    function bundelHtml(b) {
+      const previewIds = (b.kaartIds || b.voorstelIds || []).slice(0, 5);
+      const previews = previewIds.map(id => {
+        const k = kaartData.find(kaart => kaart.id === id);
+        return k ? `<img src="${k.imgVoor}" alt="${k.naam}" loading="lazy" width="120" height="150">` : '';
+      }).join('');
+
+      const inhoud = b.type === 'vast'
+        ? `<ul class="bundel-inhoud">${b.kaartIds.map(id => {
+             const k = kaartData.find(kaart => kaart.id === id);
+             return k ? `<li>${k.naam}</li>` : '';
+           }).join('')}</ul>`
+        : `<p class="bundel-kies-tekst">Je kiest zelf welke ${b.aantalKaarten} kaarten erin gaan, uit alle ${zichtbareKaarten.length} kaarten.</p>`;
+
+      const knop = b.type === 'vast'
+        ? `<button class="btn btn-primary bundel-btn" data-bundel="${b.id}">In het mandje</button>`
+        : `<button class="btn btn-primary bundel-kies-btn" data-bundel="${b.id}">Stel je set samen</button>`;
+
+      return `
+        <article class="bundel-card">
+          <div class="bundel-badge">Bespaar ${bundelKorting(b)}%</div>
+          <div class="bundel-previews" aria-hidden="true">${previews}</div>
+          <div class="bundel-body">
+            <h2 class="bundel-naam">${b.naam}</h2>
+            <p class="bundel-ondertitel">${b.ondertitel}</p>
+            <p class="bundel-prijzen">
+              <span class="bundel-prijs-nu">&euro; ${eur(b.prijs)}</span>
+              <span class="bundel-prijs-los">&euro; ${eur(losseSom(b))}</span>
+            </p>
+            <p class="bundel-per-kaart">${b.aantalKaarten} kaarten, &euro; ${eur(prijsPerKaart(b))} per kaart</p>
+            <p class="bundel-beschrijving">${b.beschrijving}</p>
+            ${inhoud}
+            ${knop}
+          </div>
+        </article>
+      `;
+    }
+
+    document.getElementById('bundels-grid').innerHTML = bundelData.map(bundelHtml).join('');
+
+    // Fallback voor ontbrekende previews
+    document.querySelectorAll('.bundel-previews img').forEach(img => {
+      img.addEventListener('error', function () { this.style.display = 'none'; });
+    });
+
+    /* ---- VASTE SET IN MANDJE -------------------------------------------- */
+    document.querySelectorAll('.bundel-btn').forEach(btn => {
+      btn.addEventListener('click', () => voegBundelToeAanMandje(btn.dataset.bundel));
+    });
+
+    /* ---- ZELF SAMENSTELLEN ---------------------------------------------- */
+    function openKiezer(bundelId) {
+      const b = vindBundel(bundelId);
+      if (!b) return;
+
+      const bestaand = document.querySelector('.kiezer-overlay');
+      if (bestaand) bestaand.remove();
+
+      const gekozen = [];
+
+      const overlay = document.createElement('div');
+      overlay.className = 'kiezer-overlay';
+      overlay.setAttribute('role', 'dialog');
+      overlay.setAttribute('aria-modal', 'true');
+      overlay.setAttribute('aria-label', b.naam);
+      overlay.innerHTML = `
+        <div class="kiezer-popup">
+          <button class="dm-sluit" aria-label="Sluiten">&#x2715;</button>
+          <p class="dm-titel">${b.naam}</p>
+          <p class="kiezer-uitleg">Klik kaarten aan tot je er ${b.aantalKaarten} hebt. Dezelfde kaart mag meerdere keren.</p>
+
+          <div class="kiezer-teller" id="kiezer-teller" aria-live="polite"></div>
+
+          <div class="kiezer-grid">
+            ${zichtbareKaarten.map(k => `
+              <button class="kiezer-kaart" data-id="${k.id}" aria-label="${k.naam} toevoegen">
+                <img src="${k.imgVoor}" alt="" loading="lazy" width="100" height="125">
+                <span class="kiezer-kaart-naam">${k.naam}</span>
+                <span class="kiezer-kaart-aantal" data-aantal-voor="${k.id}"></span>
+              </button>
+            `).join('')}
+          </div>
+
+          <div class="kiezer-acties">
+            <button class="btn btn-secondary" id="kiezer-wis">Begin opnieuw</button>
+            <button class="btn btn-primary" id="kiezer-toevoegen" disabled>
+              In het mandje voor &euro; ${eur(b.prijs)}
+            </button>
+          </div>
+        </div>`;
+
+      function ververs() {
+        const nog = b.aantalKaarten - gekozen.length;
+        const teller = overlay.querySelector('#kiezer-teller');
+        teller.textContent = nog > 0
+          ? `Nog ${nog} kaart${nog === 1 ? '' : 'en'} te kiezen`
+          : `Je set is compleet: ${b.aantalKaarten} kaarten`;
+        teller.classList.toggle('kiezer-teller--klaar', nog === 0);
+
+        overlay.querySelectorAll('[data-aantal-voor]').forEach(el => {
+          const n = gekozen.filter(id => id === parseInt(el.dataset.aantalVoor, 10)).length;
+          el.textContent = n > 0 ? n : '';
+          el.classList.toggle('zichtbaar', n > 0);
+        });
+
+        overlay.querySelector('#kiezer-toevoegen').disabled = gekozen.length !== b.aantalKaarten;
+      }
+
+      overlay.querySelectorAll('.kiezer-kaart').forEach(knop => {
+        knop.addEventListener('click', () => {
+          if (gekozen.length >= b.aantalKaarten) return;
+          gekozen.push(parseInt(knop.dataset.id, 10));
+          ververs();
+        });
+        // Rechtsklik of lang indrukken haalt er een af
+        knop.addEventListener('contextmenu', e => {
+          e.preventDefault();
+          const i = gekozen.lastIndexOf(parseInt(knop.dataset.id, 10));
+          if (i > -1) { gekozen.splice(i, 1); ververs(); }
+        });
+      });
+
+      overlay.querySelector('#kiezer-wis').addEventListener('click', () => {
+        gekozen.length = 0;
+        ververs();
+      });
+
+      overlay.querySelector('#kiezer-toevoegen').addEventListener('click', () => {
+        voegBundelToeAanMandje(b.id, gekozen);
+        overlay.remove();
+      });
+
+      overlay.querySelector('.dm-sluit').addEventListener('click', () => overlay.remove());
+      overlay.addEventListener('click', e => { if (e.target === overlay) overlay.remove(); });
+
+      document.body.appendChild(overlay);
+      ververs();
+      overlay.querySelector('.dm-sluit').focus();
+    }
+
+    document.querySelectorAll('.bundel-kies-btn').forEach(btn => {
+      btn.addEventListener('click', () => openKiezer(btn.dataset.bundel));
+    });
+  </script>
+</body>
+</html>

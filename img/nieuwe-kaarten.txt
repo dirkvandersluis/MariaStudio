@@ -1,0 +1,116 @@
+NIEUWE KAARTEN MARIA STUDIO
+Toegevoegd op 21 juli 2026 aan MariaStudios/img/
+Conventie overgenomen van bestaande kaarten: kaart-{nr}-voor.png / kaart-{nr}-achter.png
+Bestaande kaarten liepen tot 17, nieuwe lopen van 18 t/m 31.
+Alle nieuwe kaarten delen dezelfde achterkant: roze gelinieerd vel met QR-code en logo.
+Bron: C:\Users\31646\Downloads\Image (43).jpg t/m Image (57).jpg, originelen ongemoeid gelaten.
+Alle bestanden 1131x1600, onder 300kb.
+
+---
+
+kaart-18-voor.png          bron: Image (57).jpg          230 kb
+Donkerbruin, bijna zwart. Rosegoud handschrift.
+Tekst: "I will climb this mountain with my eyes fixed only on You."
+Thema: bemoediging, vertrouwen, doorzetten in moeilijke tijd
+
+kaart-19-voor.png          bron: Image (56).jpg          230 kb
+Koraalrood vlak, bruin krullend schrift.
+Tekst: "Vul dit huis met Uw glorie."
+Thema: huiszegen, nieuwe woning, housewarming
+
+kaart-20-voor.png          bron: Image (55).jpg          272 kb
+Zachtgele achtergrond, roze schrift, illustratie van schaal met vis en broden.
+Tekst: "He can do a lot with a little"
+Thema: bemoediging, vertrouwen, wonder van de vijf broden en twee vissen
+
+kaart-21-voor.png          bron: Image (54).jpg          193 kb
+Donker olijfbruin, roze schrift, omtrek van Zuid-Afrika met hartje.
+Tekst: "Here I am Lord, send me"
+Thema: zending, uitzending, roeping
+
+kaart-22-voor.png          bron: Image (53).jpg          253 kb
+Donkerbruin, patroon van zes roze sierkruisen.
+Tekst: "everything I have I owe to God."
+Thema: dankbaarheid, geloofsbelijdenis
+
+kaart-23-voor.png          bron: Image (52).jpg          251 kb
+Zeer donkergroen, roze schrift.
+Tekst: "Hineni" met onderschrift "Genesis 22"
+Thema: roeping, overgave, beschikbaarheid
+
+kaart-24-voor.png          bron: Image (51).jpg          278 kb
+Groen vlak, witte lijntekening van een hoogbouwtoren.
+Geen tekst.
+Thema: architectuur, stad, blanco kaart
+
+kaart-25-voor.png          bron: Image (50).jpg          171 kb
+Donkerblauw, koperkleurig dun schrift.
+Tekst: "Heer, wijs mij Uw weg."
+Thema: leiding, keuze maken, nieuwe stap of studiekeuze
+
+kaart-26-voor.png          bron: Image (49).jpg          269 kb
+Olijfbruin, roze kwastschrift.
+Tekst: "U bent met al mijn wegen vertrouwd." met "psalm 139"
+Thema: troost, vertrouwen, geborgenheid
+
+kaart-27-voor.jpg          bron: Image (48).jpg          213 kb
+Karmijnrood met doorlopend blauw bloemenpatroon.
+Geen tekst.
+Thema: patroon, blanco kaart
+LET OP: dit is JPG, geen PNG. Zie opmerking 2 hieronder.
+
+kaart-28-voor.jpg          bron: Image (47).jpg          222 kb
+Groen vlak, witte wireframe tekening van kantoorgebouwen.
+Geen tekst.
+Thema: architectuur, stad, blanco kaart
+LET OP: dit is JPG, geen PNG.
+
+kaart-29-voor.png          bron: Image (46).jpg          186 kb
+Wijnrood, rood krullend schrift, illustratie van schommelstoel met plaid.
+Tekst: "true rest is found in the Lord"
+Thema: rust, beterschap, ziekte of vermoeidheid
+
+kaart-30-voor.png          bron: Image (45).jpg          250 kb
+Magentaroze, letters in wisselende kleuren.
+Tekst: "There's joy in the house of our Lord"
+Thema: vreugde, felicitatie, geboorte of feest
+
+kaart-31-voor.jpg          bron: Image (44).jpg          227 kb
+Zwart-wit foto van de Rotterdamse kop van Zuid, met roze ingekleurde
+DHG-watertaxi op de Maas.
+Geen tekst.
+Thema: stadsfoto. Zie opmerking 1, deze hoort hier waarschijnlijk niet.
+LET OP: dit is JPG, geen PNG.
+
+kaart-18-achter.png t/m kaart-31-achter.png     bron: Image (43).jpg     177 kb per stuk
+Veertien identieke kopieen: roze vel met donkerblauwe schrijflijnen,
+QR-code linksonder, Maria Studio logo onderaan het midden.
+
+---
+
+OPMERKINGEN
+
+1. Nummer 31 is een zwart-wit foto van Rotterdam met een roze watertaxi waar
+   het logo van DHG op staat, een vastgoedbedrijf. Dat is geen kaart van
+   Rosalie en hoort niet in de webshop. Waarschijnlijk per ongeluk in de batch
+   beland. Ik heb hem wel verwerkt zodat de nummering klopt, maar zet hem niet
+   in js/kaarten.js voordat je dit met Rosalie hebt nagevraagd.
+
+2. Drie kaarten zijn JPG geworden in plaats van PNG: 27, 28 en 31. Als PNG
+   bleven die boven de 300kb, ook na terugbrengen naar 64 kleuren. Bij 27 en 28
+   komt dat door de fijne lijnen in het patroon, bij 31 doordat het een echte
+   foto is. De originelen waren sowieso al JPG, dus er gaat geen kwaliteit
+   verloren. De paden staan per kaart los in js/kaarten.js, dus gemengde
+   extensies breken niets. Let alleen op dat je daar .jpg schrijft en niet .png.
+
+3. Kaarten 24, 27 en 28 hebben geen tekst en geen boodschap. Die vallen op
+   tussen de rest van het assortiment. Overweeg of ze als blanco kaart in de
+   shop moeten of dat het losse illustraties zijn.
+
+4. In de projectmap staat de site twee keer. MariaStudios/img is de actuele
+   repo, met je laatste commit "Verwijder e-mail optie van contactpagina".
+   MariaStudios/MariaStudio is een oude clone die blijft hangen op de commit
+   "eerste versie" van 17 mei. Die tweede map kan weg.
+
+5. Nog te doen: veertien entries toevoegen aan js/kaarten.js met titel, prijs
+   en beschrijving. De afbeeldingen staan klaar.

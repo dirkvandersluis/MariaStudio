@@ -33,6 +33,7 @@
 
   <script src="js/config.js"></script>
   <script src="js/kaarten.js"></script>
+  <script src="js/bundels.js"></script>
   <script src="js/instagram.js"></script>
   <script src="js/mandje.js"></script>
   <script src="js/components.js"></script>
@@ -187,7 +188,8 @@
 
               <p class="detail-prijs-groot">&euro; ${kaart.prijs.toFixed(2).replace('.', ',')}</p>
               <p class="detail-meta">Formaat: ${kaart.formaat}</p>
-              <p class="detail-meta">Verzending: gratis</p>
+              <p class="detail-meta">Verzending: gratis vanaf &euro; 40,00, daaronder &euro; ${euro(VERZENDING.BRIEFPOST)}</p>
+              <p class="detail-meta"><a href="bundels.html">Voordeliger in een bundel, vanaf &euro; 2,00 per kaart</a></p>
 
               <hr class="detail-divider">
 

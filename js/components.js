@@ -5,9 +5,11 @@
   const path = window.location.pathname;
   const pagina = path.includes('kaarten.html') || path.includes('kaart-detail.html')
     ? 'kaarten'
-    : path.includes('contact.html')
-      ? 'contact'
-      : 'home';
+    : path.includes('bundels.html')
+      ? 'bundels'
+      : path.includes('contact.html')
+        ? 'contact'
+        : 'home';
 
   function actief(naam) {
     return pagina === naam ? ' class="active"' : '';
@@ -29,6 +31,7 @@
         <ul class="nav-links" id="nav-links">
           <li><a href="index.html"${actief('home')}>Home</a></li>
           <li><a href="kaarten.html"${actief('kaarten')}>Kaarten</a></li>
+          <li><a href="bundels.html"${actief('bundels')}>Bundels</a></li>
           <li><a href="contact.html"${actief('contact')}>Contact</a></li>
         </ul>
         <a href="${INSTAGRAM_URL}" target="_blank" rel="noopener noreferrer"
@@ -79,13 +82,15 @@
         <nav class="footer-nav" aria-label="Sitemap">
           <a href="index.html">Home</a>
           <a href="kaarten.html">Kaarten</a>
+          <a href="bundels.html">Bundels</a>
           <a href="contact.html">Contact</a>
         </nav>
         <div class="footer-col footer-info">
           <p>Formaat: 11,7 x 18,2 cm</p>
-          <p>Prijs: &euro; 4,00 per kaart</p>
+          <p>Prijs: &euro; 2,50 per kaart</p>
+          <p>Bundels: vanaf &euro; 2,00 per kaart</p>
           <p>Gepersonaliseerd: &euro; 6,00</p>
-          <p>Verzending: gratis</p>
+          <p>Verzending: gratis vanaf &euro; 40,00</p>
           <!-- KVK-nummer toevoegen zodra ingeschreven -->
         </div>
       </div>
@@ -96,7 +101,7 @@
   // ---- ESCAPE sluit popups -----------------------------------------------
   document.addEventListener('keydown', function (e) {
     if (e.key !== 'Escape') return;
-    const overlay = document.querySelector('.dm-overlay, .mandje-overlay, .lightbox-overlay');
+    const overlay = document.querySelector('.dm-overlay, .mandje-overlay, .lightbox-overlay, .kiezer-overlay');
     if (overlay) overlay.remove();
   });
 

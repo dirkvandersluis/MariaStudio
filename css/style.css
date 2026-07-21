@@ -1591,3 +1591,368 @@ ul { list-style: none; }
   line-height: 1.6;
   text-align: center;
 }
+
+/* ============================================================
+   BUNDELS
+   ============================================================ */
+.verzend-balk {
+  background-color: var(--cream);
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.verzend-balk__inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.verzend-balk__hoofd {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  color: var(--forest);
+  margin-bottom: 0.25rem;
+}
+
+.verzend-balk__detail {
+  font-size: 0.85rem;
+  color: #5c5c5c;
+  line-height: 1.6;
+}
+
+.bundels-section {
+  padding: 0 1.5rem 4rem;
+}
+
+.bundels-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  align-items: start;
+}
+
+.bundel-card {
+  position: relative;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow var(--transition);
+}
+
+.bundel-card:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
+}
+
+.bundel-badge {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 2;
+  background-color: var(--coral);
+  color: var(--white);
+  font-size: 0.75rem;
+  letter-spacing: 0.03em;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+}
+
+.bundel-previews {
+  display: flex;
+  gap: 0.3rem;
+  padding: 1rem 1rem 0;
+  overflow: hidden;
+}
+
+.bundel-previews img {
+  width: 100%;
+  height: auto;
+  border-radius: 2px;
+  object-fit: cover;
+}
+
+.bundel-body {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.bundel-naam {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.35rem;
+  font-weight: 400;
+  margin-bottom: 0.2rem;
+}
+
+.bundel-ondertitel {
+  font-size: 0.85rem;
+  color: #6b6b6b;
+  margin-bottom: 0.9rem;
+}
+
+.bundel-prijzen {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  margin-bottom: 0.15rem;
+}
+
+.bundel-prijs-nu {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  color: var(--coral);
+}
+
+.bundel-prijs-los {
+  font-size: 0.95rem;
+  color: #9a9a9a;
+  text-decoration: line-through;
+}
+
+.bundel-per-kaart {
+  font-size: 0.8rem;
+  color: var(--forest);
+  margin-bottom: 0.9rem;
+}
+
+.bundel-beschrijving {
+  font-size: 0.9rem;
+  line-height: 1.65;
+  margin-bottom: 0.9rem;
+}
+
+.bundel-inhoud {
+  list-style: none;
+  margin-bottom: 1.2rem;
+  font-size: 0.85rem;
+  color: #5c5c5c;
+}
+
+.bundel-inhoud li {
+  padding: 0.28rem 0 0.28rem 1rem;
+  position: relative;
+  border-bottom: 1px solid #f0eae0;
+}
+
+.bundel-inhoud li:last-child { border-bottom: none; }
+
+.bundel-inhoud li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.95rem;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: var(--blush);
+}
+
+.bundel-kies-tekst {
+  font-size: 0.85rem;
+  color: #5c5c5c;
+  margin-bottom: 1.2rem;
+}
+
+.bundel-card .btn {
+  margin-top: auto;
+  width: 100%;
+  text-align: center;
+}
+
+/* ---- KIEZER (zelf een set samenstellen) ---- */
+.kiezer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(44, 44, 44, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  padding: 1rem;
+}
+
+.kiezer-popup {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 2rem;
+  max-width: 720px;
+  width: 100%;
+  position: relative;
+  max-height: 88vh;
+  overflow-y: auto;
+}
+
+.kiezer-uitleg {
+  font-size: 0.88rem;
+  color: #5c5c5c;
+  margin-bottom: 1rem;
+}
+
+.kiezer-teller {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: var(--cream);
+  color: var(--forest);
+  font-family: 'Playfair Display', serif;
+  text-align: center;
+  padding: 0.6rem;
+  border-radius: var(--radius);
+  margin-bottom: 1rem;
+}
+
+.kiezer-teller--klaar {
+  background-color: var(--forest);
+  color: var(--white);
+}
+
+.kiezer-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.6rem;
+  margin-bottom: 1.5rem;
+}
+
+.kiezer-kaart {
+  position: relative;
+  background: none;
+  border: 2px solid transparent;
+  border-radius: var(--radius);
+  padding: 0.25rem;
+  cursor: pointer;
+  font-family: inherit;
+  text-align: center;
+  transition: border-color var(--transition);
+}
+
+.kiezer-kaart:hover,
+.kiezer-kaart:focus-visible {
+  border-color: var(--blush);
+}
+
+.kiezer-kaart img {
+  width: 100%;
+  height: auto;
+  border-radius: 2px;
+}
+
+.kiezer-kaart-naam {
+  display: block;
+  font-size: 0.68rem;
+  line-height: 1.3;
+  color: #5c5c5c;
+  margin-top: 0.3rem;
+}
+
+.kiezer-kaart-aantal {
+  display: none;
+  position: absolute;
+  top: 0.4rem;
+  right: 0.4rem;
+  min-width: 1.4rem;
+  height: 1.4rem;
+  line-height: 1.4rem;
+  border-radius: 50%;
+  background-color: var(--coral);
+  color: var(--white);
+  font-size: 0.75rem;
+}
+
+.kiezer-kaart-aantal.zichtbaar { display: block; }
+
+.kiezer-acties {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+  position: sticky;
+  bottom: 0;
+  background: var(--white);
+  padding-top: 0.75rem;
+}
+
+.kiezer-acties .btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* ---- MANDJE: kostenoverzicht ---- */
+.mandje-kosten {
+  border-top: 1px solid var(--border);
+  padding-top: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.mandje-kosten-regel {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.9rem;
+  padding: 0.2rem 0;
+}
+
+.mandje-kosten .mandje-totaal {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  text-align: left;
+  margin: 0.4rem 0 0;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.mandje-gratis-melding {
+  background-color: var(--cream);
+  color: var(--forest);
+  font-size: 0.85rem;
+  text-align: center;
+  padding: 0.6rem;
+  border-radius: var(--radius);
+  margin: 0.9rem 0 1.2rem;
+}
+
+.mandje-gratis-behaald {
+  background-color: var(--forest);
+  color: var(--white);
+}
+
+.mandje-item-sub {
+  display: block;
+  font-size: 0.72rem;
+  color: #7a7a7a;
+  line-height: 1.4;
+  margin-top: 0.15rem;
+}
+
+@media (max-width: 900px) {
+  .bundels-grid { grid-template-columns: repeat(2, 1fr); }
+  .kiezer-grid  { grid-template-columns: repeat(4, 1fr); }
+}
+
+@media (max-width: 600px) {
+  .bundels-grid   { grid-template-columns: 1fr; gap: 1.25rem; }
+  .kiezer-grid    { grid-template-columns: repeat(3, 1fr); }
+  .kiezer-popup   { padding: 1.25rem; max-height: 92vh; }
+  .bundel-previews { padding: 0.75rem 0.75rem 0; }
+  .bundel-body    { padding: 1rem; }
+  .kiezer-acties  { flex-direction: column-reverse; }
+  .kiezer-acties .btn { width: 100%; }
+  .verzend-balk   { padding: 1rem; margin-bottom: 2rem; }
+}
+
+.page-header__link {
+  display: inline-block;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--forest);
+  border-bottom: 1px solid var(--blush);
+  padding-bottom: 1px;
+}
+
+.page-header__link:hover {
+  color: var(--coral);
+  border-bottom-color: var(--coral);
+}
