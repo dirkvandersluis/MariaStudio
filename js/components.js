@@ -22,7 +22,7 @@
     navEl.setAttribute('aria-label', 'Hoofdnavigatie');
     navEl.innerHTML = `
       <a href="index.html" class="nav-logo-link">
-        <img src="img/logo.png" alt="Maria Studio" class="nav-logo" width="160" height="44">
+        <img src="img/logo.png" alt="Maria Studio" class="nav-logo" width="42" height="60">
       </a>
       <div class="nav-right">
         <button class="nav-hamburger" id="hamburger" aria-label="Menu openen" aria-expanded="false">
