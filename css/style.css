@@ -87,7 +87,7 @@ ul { list-style: none; }
 }
 
 .nav-logo {
-  max-height: 80px;
+  max-height: 90px;
   width: auto;
   object-fit: contain;
   display: block;
@@ -1009,7 +1009,7 @@ ul { list-style: none; }
 }
 
 .hero-logo {
-  max-height: 220px;
+  max-height: 300px;
   width: auto;
   object-fit: contain;
   display: block;
@@ -1047,7 +1047,7 @@ ul { list-style: none; }
 @media (max-width: 600px) {
   :root { --nav-height: 72px; }
   .site-nav { height: 72px; padding: 0 4vw; }
-  .nav-logo { max-height: 56px; }
+  .nav-logo { max-height: 64px; }
 
   .nav-right { gap: 1rem; }
 
@@ -1496,7 +1496,7 @@ ul { list-style: none; }
    HERO-LOGO MOBIEL
    ============================================================ */
 @media (max-width: 600px) {
-  .hero-logo { max-height: 140px; }
+  .hero-logo { max-height: 180px; }
 }
 
 /* ============================================================

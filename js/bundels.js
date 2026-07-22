@@ -56,7 +56,7 @@ const bundelData = [
     beschrijving: 'Vijf ingetogen kaarten voor bij ziekte, verlies of een periode waarin het tegenzit. Rustige kleuren en teksten die troost geven zonder overdreven vrolijk te doen.',
     aantalKaarten: 5,
     prijs: 11.00,
-    kaartIds: [18, 13, 25, 14, 5]
+    kaartIds: [18, 13, 25, 4, 22]
   },
   {
     id: 'set-zomaar',
@@ -66,7 +66,7 @@ const bundelData = [
     beschrijving: 'Vijf kaarten met alleen een illustratie en geen vaste boodschap. Handig om achter de hand te hebben, want je kunt ze voor elke gelegenheid gebruiken.',
     aantalKaarten: 5,
     prijs: 11.00,
-    kaartIds: [8, 9, 10, 12, 24]
+    kaartIds: [27, 28, 10, 12, 24]
   },
   {
     id: 'mix-10',
@@ -85,7 +85,7 @@ const bundelData = [
     beschrijving: 'Vijftien kaarten door de hele collectie heen, zodat je voor elke gelegenheid iets in huis hebt. De voordeligste manier om kaarten te kopen.',
     aantalKaarten: 15,
     prijs: 30.00,
-    voorstelIds: [2, 7, 15, 11, 8, 9, 10, 12, 24, 1, 6, 18, 23, 26, 13]
+    voorstelIds: [3, 17, 22, 11, 27, 28, 10, 12, 24, 1, 6, 18, 25, 26, 13]
   }
 ];
 

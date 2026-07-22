@@ -22,7 +22,7 @@
     navEl.setAttribute('aria-label', 'Hoofdnavigatie');
     navEl.innerHTML = `
       <a href="index.html" class="nav-logo-link">
-        <img src="img/logo.png" alt="Maria Studio" class="nav-logo" width="57" height="80">
+        <img src="img/logo.png" alt="Maria Studio" class="nav-logo" width="64" height="90">
       </a>
       <div class="nav-right">
         <button class="nav-hamburger" id="hamburger" aria-label="Menu openen" aria-expanded="false">
@@ -86,7 +86,7 @@
           <a href="contact.html">Contact</a>
         </nav>
         <div class="footer-col footer-info">
-          <p>Formaat: 11,7 x 18,2 cm</p>
+          <p>Formaat: 10,5 x 14,8 cm (A6)</p>
           <p>Prijs: &euro; 2,50 per kaart</p>
           <p>Bundels: vanaf &euro; 2,00 per kaart</p>
           <p>Gepersonaliseerd: &euro; 6,00</p>
