@@ -95,6 +95,10 @@
         </div>
       </div>
       <p class="footer-copy">&copy; 2025 Maria Studio &mdash; Rosalie Maria van der Sluis</p>
+      <p class="footer-credit">Website door
+        <a href="https://www.linkedin.com/in/dirk-van-der-sluis-144945314/"
+           target="_blank" rel="noopener noreferrer">Dirk van der Sluis</a>
+      </p>
     `;
   }
 
