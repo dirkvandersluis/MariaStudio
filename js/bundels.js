@@ -79,13 +79,13 @@ const bundelData = [
   },
   {
     id: 'variety-15',
-    type: 'kies',
+    type: 'vast',
     naam: 'Variety box',
     ondertitel: 'Vijftien kaarten voor elke gelegenheid',
     beschrijving: 'Vijftien kaarten door de hele collectie heen, zodat je voor elke gelegenheid iets in huis hebt. De voordeligste manier om kaarten te kopen.',
     aantalKaarten: 15,
     prijs: 30.00,
-    voorstelIds: [3, 17, 22, 11, 27, 28, 10, 12, 24, 1, 6, 18, 25, 26, 13]
+    kaartIds: [3, 17, 22, 11, 27, 28, 10, 12, 24, 1, 6, 18, 25, 26, 13]
   }
 ];
 
@@ -117,7 +117,7 @@ function vindBundel(id) {
     if (prijsPerKaart(b) < MIN_KAART_PRIJS_IN_BUNDEL) {
       console.warn(`Bundel "${b.naam}" komt op ${prijsPerKaart(b).toFixed(2)} per kaart, onder de ondergrens van ${MIN_KAART_PRIJS_IN_BUNDEL.toFixed(2)}.`);
     }
-    (b.kaartIds || b.voorstelIds || []).forEach(id => {
+    (b.kaartIds || []).forEach(id => {
       if (!kaartData.find(k => k.id === id)) {
         console.warn(`Bundel "${b.naam}" verwijst naar kaart ${id} die niet bestaat.`);
       }

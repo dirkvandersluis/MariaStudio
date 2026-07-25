@@ -81,25 +81,18 @@
 
     /* ---- BUNDELKAARTEN -------------------------------------------------- */
     function bundelHtml(b) {
-      const previewIds = (b.kaartIds || b.voorstelIds || []).slice(0, 5);
+      const previewIds = (b.kaartIds || []).slice(0, 5);
       const previews = previewIds.map(id => {
         const k = kaartData.find(kaart => kaart.id === id);
         return k ? `<img src="${k.imgVoor}" alt="${k.naam}" loading="lazy" width="120" height="150">` : '';
       }).join('');
-
-      const inhoud = b.type === 'vast'
-        ? `<ul class="bundel-inhoud">${b.kaartIds.map(id => {
-             const k = kaartData.find(kaart => kaart.id === id);
-             return k ? `<li>${k.naam}</li>` : '';
-           }).join('')}</ul>`
-        : `<p class="bundel-kies-tekst">Je kiest zelf welke ${b.aantalKaarten} kaarten erin gaan, uit alle ${zichtbareKaarten.length} kaarten.</p>`;
 
       const knop = b.type === 'vast'
         ? `<button class="btn btn-primary bundel-btn" data-bundel="${b.id}">In het mandje</button>`
         : `<button class="btn btn-primary bundel-kies-btn" data-bundel="${b.id}">Stel je set samen</button>`;
 
       return `
-        <article class="bundel-card">
+        <article class="bundel-card" data-bundel="${b.id}">
           <div class="bundel-badge">Bespaar ${bundelKorting(b)}%</div>
           <div class="bundel-previews" aria-hidden="true">${previews}</div>
           <div class="bundel-body">
@@ -111,7 +104,7 @@
             </p>
             <p class="bundel-per-kaart">${b.aantalKaarten} kaarten, &euro; ${eur(prijsPerKaart(b))} per kaart</p>
             <p class="bundel-beschrijving">${b.beschrijving}</p>
-            ${inhoud}
+            <button type="button" class="bundel-open-hint" data-bundel="${b.id}">Bekijk de kaarten &rarr;</button>
             ${knop}
           </div>
         </article>
@@ -125,104 +118,158 @@
       img.addEventListener('error', function () { this.style.display = 'none'; });
     });
 
-    /* ---- VASTE SET IN MANDJE -------------------------------------------- */
+    /* ---- VASTE SET IN MANDJE (rechtstreeks vanaf de kaart) --------------- */
     document.querySelectorAll('.bundel-btn').forEach(btn => {
       btn.addEventListener('click', () => voegBundelToeAanMandje(btn.dataset.bundel));
     });
 
-    /* ---- ZELF SAMENSTELLEN ---------------------------------------------- */
-    function openKiezer(bundelId) {
+    /* ---- BUNDEL AANKLIKKEN OPENT DE DETAILWEERGAVE ----------------------- */
+    document.querySelectorAll('.bundel-card').forEach(card => {
+      card.addEventListener('click', e => {
+        if (e.target.closest('button')) return; // knoppen op de kaart handelen zichzelf af
+        openBundelDetail(card.dataset.bundel);
+      });
+    });
+
+    document.querySelectorAll('.bundel-open-hint').forEach(btn => {
+      btn.addEventListener('click', () => openBundelDetail(btn.dataset.bundel));
+    });
+
+    document.querySelectorAll('.bundel-kies-btn').forEach(btn => {
+      btn.addEventListener('click', () => openBundelDetail(btn.dataset.bundel));
+    });
+
+    document.addEventListener('keydown', e => {
+      if (e.key !== 'Escape') return;
+      const overlay = document.querySelector('.kiezer-overlay');
+      if (overlay) overlay.remove();
+    });
+
+    /* ---- DETAILWEERGAVE ---------------------------------------------------
+       type 'vast'  -> alleen tonen: alle kaarten met naam en afbeelding
+       type 'kies'  -> zelf samenstellen: klikken, teller, knop pas actief bij
+                       het juiste aantal
+       ------------------------------------------------------------------- */
+    function openBundelDetail(bundelId) {
       const b = vindBundel(bundelId);
       if (!b) return;
 
       const bestaand = document.querySelector('.kiezer-overlay');
       if (bestaand) bestaand.remove();
 
-      const gekozen = [];
-
       const overlay = document.createElement('div');
       overlay.className = 'kiezer-overlay';
       overlay.setAttribute('role', 'dialog');
       overlay.setAttribute('aria-modal', 'true');
       overlay.setAttribute('aria-label', b.naam);
-      overlay.innerHTML = `
-        <div class="kiezer-popup">
-          <button class="dm-sluit" aria-label="Sluiten">&#x2715;</button>
-          <p class="dm-titel">${b.naam}</p>
-          <p class="kiezer-uitleg">Klik kaarten aan tot je er ${b.aantalKaarten} hebt. Dezelfde kaart mag meerdere keren.</p>
 
-          <div class="kiezer-teller" id="kiezer-teller" aria-live="polite"></div>
+      if (b.type === 'vast') {
+        const kaarten = (b.kaartIds || []).map(id => kaartData.find(k => k.id === id)).filter(Boolean);
 
-          <div class="kiezer-grid">
-            ${zichtbareKaarten.map(k => `
-              <button class="kiezer-kaart" data-id="${k.id}" aria-label="${k.naam} toevoegen">
-                <img src="${k.imgVoor}" alt="" loading="lazy" width="100" height="125">
-                <span class="kiezer-kaart-naam">${k.naam}</span>
-                <span class="kiezer-kaart-aantal" data-aantal-voor="${k.id}"></span>
-              </button>
-            `).join('')}
-          </div>
+        overlay.innerHTML = `
+          <div class="kiezer-popup">
+            <button class="dm-sluit" aria-label="Sluiten">&#x2715;</button>
+            <p class="dm-titel">${b.naam}</p>
+            <p class="kiezer-uitleg">Deze bundel bevat deze ${b.aantalKaarten} kaarten.</p>
 
-          <div class="kiezer-acties">
-            <button class="btn btn-secondary" id="kiezer-wis">Begin opnieuw</button>
-            <button class="btn btn-primary" id="kiezer-toevoegen" disabled>
-              In het mandje voor &euro; ${eur(b.prijs)}
-            </button>
-          </div>
-        </div>`;
+            <div class="kiezer-grid">
+              ${kaarten.map(k => `
+                <div class="kiezer-kaart kiezer-kaart--readonly">
+                  <img src="${k.imgVoor}" alt="" loading="lazy" width="100" height="125">
+                  <span class="kiezer-kaart-naam">${k.naam}</span>
+                </div>
+              `).join('')}
+            </div>
 
-      function ververs() {
-        const nog = b.aantalKaarten - gekozen.length;
-        const teller = overlay.querySelector('#kiezer-teller');
-        teller.textContent = nog > 0
-          ? `Nog ${nog} kaart${nog === 1 ? '' : 'en'} te kiezen`
-          : `Je set is compleet: ${b.aantalKaarten} kaarten`;
-        teller.classList.toggle('kiezer-teller--klaar', nog === 0);
+            <div class="kiezer-acties">
+              <button class="btn btn-primary" id="kiezer-mandje">In het mandje voor &euro; ${eur(b.prijs)}</button>
+            </div>
+          </div>`;
 
-        overlay.querySelectorAll('[data-aantal-voor]').forEach(el => {
-          const n = gekozen.filter(id => id === parseInt(el.dataset.aantalVoor, 10)).length;
-          el.textContent = n > 0 ? n : '';
-          el.classList.toggle('zichtbaar', n > 0);
+        overlay.querySelector('#kiezer-mandje').addEventListener('click', () => {
+          voegBundelToeAanMandje(b.id);
+          overlay.remove();
         });
 
-        overlay.querySelector('#kiezer-toevoegen').disabled = gekozen.length !== b.aantalKaarten;
-      }
+      } else {
+        const gekozen = [];
 
-      overlay.querySelectorAll('.kiezer-kaart').forEach(knop => {
-        knop.addEventListener('click', () => {
-          if (gekozen.length >= b.aantalKaarten) return;
-          gekozen.push(parseInt(knop.dataset.id, 10));
+        overlay.innerHTML = `
+          <div class="kiezer-popup">
+            <button class="dm-sluit" aria-label="Sluiten">&#x2715;</button>
+            <p class="dm-titel">${b.naam}</p>
+            <p class="kiezer-uitleg">Klik kaarten aan tot je er ${b.aantalKaarten} hebt. Dezelfde kaart mag meerdere keren.</p>
+
+            <div class="kiezer-teller" id="kiezer-teller" aria-live="polite"></div>
+
+            <div class="kiezer-grid">
+              ${zichtbareKaarten.map(k => `
+                <button class="kiezer-kaart" data-id="${k.id}" aria-label="${k.naam} toevoegen">
+                  <img src="${k.imgVoor}" alt="" loading="lazy" width="100" height="125">
+                  <span class="kiezer-kaart-naam">${k.naam}</span>
+                  <span class="kiezer-kaart-aantal" data-aantal-voor="${k.id}"></span>
+                </button>
+              `).join('')}
+            </div>
+
+            <div class="kiezer-acties">
+              <button class="btn btn-secondary" id="kiezer-wis">Begin opnieuw</button>
+              <button class="btn btn-primary" id="kiezer-toevoegen" disabled>
+                In het mandje voor &euro; ${eur(b.prijs)}
+              </button>
+            </div>
+          </div>`;
+
+        function ververs() {
+          const nog = b.aantalKaarten - gekozen.length;
+          const teller = overlay.querySelector('#kiezer-teller');
+          teller.textContent = nog > 0
+            ? `${gekozen.length} van ${b.aantalKaarten} gekozen, nog ${nog} te gaan`
+            : `Compleet: ${b.aantalKaarten} van ${b.aantalKaarten} gekozen`;
+          teller.classList.toggle('kiezer-teller--klaar', nog === 0);
+
+          overlay.querySelectorAll('[data-aantal-voor]').forEach(el => {
+            const n = gekozen.filter(id => id === parseInt(el.dataset.aantalVoor, 10)).length;
+            el.textContent = n > 0 ? n : '';
+            el.classList.toggle('zichtbaar', n > 0);
+          });
+
+          overlay.querySelector('#kiezer-toevoegen').disabled = gekozen.length !== b.aantalKaarten;
+        }
+
+        overlay.querySelectorAll('.kiezer-kaart').forEach(knop => {
+          knop.addEventListener('click', () => {
+            if (gekozen.length >= b.aantalKaarten) return;
+            gekozen.push(parseInt(knop.dataset.id, 10));
+            ververs();
+          });
+          // Rechtsklik haalt er een af
+          knop.addEventListener('contextmenu', e => {
+            e.preventDefault();
+            const i = gekozen.lastIndexOf(parseInt(knop.dataset.id, 10));
+            if (i > -1) { gekozen.splice(i, 1); ververs(); }
+          });
+        });
+
+        overlay.querySelector('#kiezer-wis').addEventListener('click', () => {
+          gekozen.length = 0;
           ververs();
         });
-        // Rechtsklik of lang indrukken haalt er een af
-        knop.addEventListener('contextmenu', e => {
-          e.preventDefault();
-          const i = gekozen.lastIndexOf(parseInt(knop.dataset.id, 10));
-          if (i > -1) { gekozen.splice(i, 1); ververs(); }
+
+        overlay.querySelector('#kiezer-toevoegen').addEventListener('click', () => {
+          voegBundelToeAanMandje(b.id, gekozen);
+          overlay.remove();
         });
-      });
 
-      overlay.querySelector('#kiezer-wis').addEventListener('click', () => {
-        gekozen.length = 0;
         ververs();
-      });
-
-      overlay.querySelector('#kiezer-toevoegen').addEventListener('click', () => {
-        voegBundelToeAanMandje(b.id, gekozen);
-        overlay.remove();
-      });
+      }
 
       overlay.querySelector('.dm-sluit').addEventListener('click', () => overlay.remove());
       overlay.addEventListener('click', e => { if (e.target === overlay) overlay.remove(); });
 
       document.body.appendChild(overlay);
-      ververs();
       overlay.querySelector('.dm-sluit').focus();
     }
-
-    document.querySelectorAll('.bundel-kies-btn').forEach(btn => {
-      btn.addEventListener('click', () => openKiezer(btn.dataset.bundel));
-    });
   </script>
 </body>
 </html>
