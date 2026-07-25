@@ -23,7 +23,7 @@
   --dark:       #2C2C2C;
   --border:     #e0d5c5;
 
-  --nav-height: 116px;
+  --nav-height: 90px;
   --radius:     4px;
   --transition: 0.2s ease;
 }
@@ -92,7 +92,7 @@ ul { list-style: none; }
 }
 
 .nav-logo {
-  max-height: 108px;
+  max-height: 82px;
   width: auto;
   object-fit: contain;
   display: block;
@@ -1050,9 +1050,9 @@ ul { list-style: none; }
    RESPONSIVE — MOBIEL (600px)
    ============================================================ */
 @media (max-width: 600px) {
-  :root { --nav-height: 88px; }
-  .site-nav { height: 88px; margin: 0.75rem 1rem 0; padding: 0 1.25rem; }
-  .nav-logo { max-height: 82px; }
+  :root { --nav-height: 70px; }
+  .site-nav { height: 70px; margin: 0.75rem 1rem 0; padding: 0 1.25rem; }
+  .nav-logo { max-height: 64px; }
 
   .nav-right { gap: 1rem; }
 

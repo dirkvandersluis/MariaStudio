@@ -22,7 +22,7 @@
     navEl.setAttribute('aria-label', 'Hoofdnavigatie');
     navEl.innerHTML = `
       <a href="index.html" class="nav-logo-link">
-        <img src="img/logo-leeg.png" alt="Maria Studio" class="nav-logo" width="147" height="108">
+        <img src="img/logo-leeg.png" alt="Maria Studio" class="nav-logo" width="112" height="82">
       </a>
       <div class="nav-right">
         <button class="nav-hamburger" id="hamburger" aria-label="Menu openen" aria-expanded="false">
@@ -96,7 +96,7 @@
       </div>
       <p class="footer-copy">&copy; 2025 Maria Studio &mdash; Rosalie Maria van der Sluis</p>
       <p class="footer-credit">Website door
-        <a href="https://www.linkedin.com/in/dirk-van-der-sluis-144945314/"
+        <a href="https://dirkvandersluisportfolio.netlify.app/#top"
            target="_blank" rel="noopener noreferrer">Dirk van der Sluis</a>
       </p>
     `;
