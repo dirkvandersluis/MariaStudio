@@ -30,7 +30,7 @@ function voegToeAanMandje(kaartId) {
   if (bestaand) {
     bestaand.aantal += 1;
   } else {
-    mandje.push({ id: kaartId, naam: kaart.naam, prijs: kaart.prijs, aantal: 1, aantalKaarten: 1 });
+    mandje.push({ id: kaartId, aantal: 1 });
   }
   slaMandjeOp(mandje);
   toonMandjeBevestiging(kaart.naam);
@@ -46,11 +46,6 @@ function voegBundelToeAanMandje(bundelId, gekozen) {
   const bundel = vindBundel(bundelId);
   if (!bundel) return;
 
-  const ids = gekozen && gekozen.length ? gekozen : (bundel.kaartIds || []);
-  const namen = ids
-    .map(id => (kaartData.find(k => k.id === id) || {}).naam)
-    .filter(Boolean);
-
   // Een zelf samengestelde set is elke keer uniek, dus die krijgt een eigen regel.
   const regelId = bundel.type === 'kies' ? `${bundel.id}-${Date.now()}` : bundel.id;
   const bestaand = bundel.type === 'vast' ? mandje.find(item => item.id === bundel.id) : null;
@@ -58,18 +53,30 @@ function voegBundelToeAanMandje(bundelId, gekozen) {
   if (bestaand) {
     bestaand.aantal += 1;
   } else {
-    mandje.push({
-      id: regelId,
-      naam: bundel.naam,
-      prijs: bundel.prijs,
-      aantal: 1,
-      aantalKaarten: bundel.aantalKaarten,
-      isBundel: true,
-      kaarten: namen
-    });
+    const item = { id: regelId, bundelId: bundel.id, aantal: 1 };
+    if (gekozen && gekozen.length) item.gekozen = gekozen.slice();
+    mandje.push(item);
   }
   slaMandjeOp(mandje);
   toonMandjeBevestiging(bundel.naam);
+}
+
+/**
+ * Leest naam, prijs en (voor bundels) de kaartnamen live uit kaartData/bundelData.
+ * Zo staat de kaartnaam maar op een plek en werkt een naamswijziging daar altijd door,
+ * ook voor regels die al in het mandje zaten voordat de naam werd aangepast.
+ */
+function regelInfo(item) {
+  if (item.bundelId) {
+    const b = vindBundel(item.bundelId);
+    if (!b) return null;
+    const ids = item.gekozen && item.gekozen.length ? item.gekozen : (b.kaartIds || []);
+    const kaarten = ids.map(id => (kaartData.find(k => k.id === id) || {}).naam).filter(Boolean);
+    return { naam: b.naam, prijs: b.prijs, aantalKaarten: b.aantalKaarten, isBundel: true, kaarten };
+  }
+  const k = kaartData.find(k => k.id === item.id);
+  if (!k) return null;
+  return { naam: k.naam, prijs: k.prijs, aantalKaarten: 1, isBundel: false, kaarten: [] };
 }
 
 function verwijderUitMandje(regelId) {
@@ -95,8 +102,8 @@ function pasAantalAan(regelId, delta) {
    ------------------------------------------------------------------ */
 
 function mandjeTotalen(mandje) {
-  const subtotaal    = mandje.reduce((som, item) => som + (item.prijs * item.aantal), 0);
-  const aantalKaarten = mandje.reduce((som, item) => som + ((item.aantalKaarten || 1) * item.aantal), 0);
+  const subtotaal    = mandje.reduce((som, item) => som + ((regelInfo(item) || {}).prijs || 0) * item.aantal, 0);
+  const aantalKaarten = mandje.reduce((som, item) => som + (((regelInfo(item) || {}).aantalKaarten || 1) * item.aantal), 0);
   const verzending   = berekenVerzending(aantalKaarten, subtotaal);
   return {
     subtotaal,
@@ -109,7 +116,7 @@ function mandjeTotalen(mandje) {
 
 function updateMandjeCounter() {
   const mandje = getMandjeData();
-  const totaal = mandje.reduce((sum, item) => sum + ((item.aantalKaarten || 1) * item.aantal), 0);
+  const totaal = mandje.reduce((sum, item) => sum + (((regelInfo(item) || {}).aantalKaarten || 1) * item.aantal), 0);
   document.querySelectorAll('.mandje-counter').forEach(el => {
     el.textContent = totaal;
     el.style.display = totaal > 0 ? 'flex' : 'none';
@@ -157,11 +164,12 @@ function toonMandje() {
   }
 
   const t = mandjeTotalen(mandje);
+  const regels = mandje.map(item => ({ item, info: regelInfo(item) })).filter(r => r.info);
 
-  const berichtRegels = mandje.map(item => {
-    const regel = `- ${item.naam} x${item.aantal} (€ ${euro(item.prijs * item.aantal)})`;
-    return item.isBundel && item.kaarten && item.kaarten.length
-      ? regel + '\n' + item.kaarten.map(n => `    * ${n}`).join('\n')
+  const berichtRegels = regels.map(({ item, info }) => {
+    const regel = `- ${info.naam} x${item.aantal} (€ ${euro(info.prijs * item.aantal)})`;
+    return info.isBundel && info.kaarten.length
+      ? regel + '\n' + info.kaarten.map(n => `    * ${n}`).join('\n')
       : regel;
   }).join('\n');
 
@@ -188,20 +196,20 @@ function toonMandje() {
       <button class="dm-sluit" aria-label="Sluiten">&#x2715;</button>
       <p class="dm-titel">Je mandje</p>
       <ul class="mandje-lijst">
-        ${mandje.map(item => `
+        ${regels.map(({ item, info }) => `
           <li>
             <span class="mandje-item-naam">
-              ${item.naam}
-              ${item.isBundel ? `<span class="mandje-item-sub">${item.aantalKaarten} kaarten${item.kaarten && item.kaarten.length ? ': ' + item.kaarten.join(', ') : ''}</span>` : ''}
+              ${info.naam}
+              ${info.isBundel ? `<span class="mandje-item-sub">${info.aantalKaarten} kaarten${info.kaarten.length ? ': ' + info.kaarten.join(', ') : ''}</span>` : ''}
             </span>
             <div class="mandje-item-ctrl">
               <div class="mandje-aantal-ctrl">
-                <button class="mandje-min" data-id="${item.id}" aria-label="${item.naam} min">-</button>
+                <button class="mandje-min" data-id="${item.id}" aria-label="${info.naam} min">-</button>
                 <span class="mandje-aantal">${item.aantal}</span>
-                <button class="mandje-plus" data-id="${item.id}" aria-label="${item.naam} plus">+</button>
+                <button class="mandje-plus" data-id="${item.id}" aria-label="${info.naam} plus">+</button>
               </div>
-              <span class="mandje-item-prijs">&euro;&nbsp;${euro(item.prijs * item.aantal)}</span>
-              <button class="mandje-verwijder" data-id="${item.id}" aria-label="${item.naam} verwijderen">&#x2715;</button>
+              <span class="mandje-item-prijs">&euro;&nbsp;${euro(info.prijs * item.aantal)}</span>
+              <button class="mandje-verwijder" data-id="${item.id}" aria-label="${info.naam} verwijderen">&#x2715;</button>
             </div>
           </li>`).join('')}
       </ul>

@@ -318,6 +318,17 @@ const kaartData = [
     prijs: 2.50,
     gepersonaliseerd: false,
     formaat: "10,5 x 14,8 cm (A6)"
+  },
+  {
+    id: 32,
+    naam: "Boeket",
+    categorie: "zomaar",
+    beschrijving: "Een line-art tekening van een bloemenboeket in koraalrood op een donkere achtergrond, gesigneerd met het Maria Studio logo. Zonder tekst, dus geschikt voor elke gelegenheid. Met gelijnde achterkant.",
+    imgVoor: "img/kaart-32-voor.png",
+    imgAchter: "img/achterkant.png",
+    prijs: 2.50,
+    gepersonaliseerd: false,
+    formaat: "10,5 x 14,8 cm (A6)"
   }
 ];
 
@@ -334,6 +345,7 @@ const kaartData = [
   - De ids 20, 29 en 30 zijn bewust overgeslagen. De bijbehorende afbeeldingen in img/
     zijn opnieuw ingescande versies van kaarten die al bestonden als id 17, 13 en 3.
     Ze zijn niet als los product toegevoegd om dubbele listings te voorkomen.
+  - Kaart 32 (Boeket) is nieuw toegevoegd, naam is voorlopig, wordt later nog aangepast.
   - Kaart 27, 28 en 31 hebben een .jpg voorkant in plaats van .png. Als PNG bleven ze
     boven de 300kb. De achterkanten zijn wel .png.
   - Kaart 31 (Rotterdam) staat sinds juli 2026 op zichtbaar: wordt verkocht. Let op: er
