@@ -4,3 +4,4 @@ const INSTAGRAM_URL    = 'https://www.instagram.com/' + INSTAGRAM_HANDLE;
 // Example: const WHATSAPP_NUMMER = '31612345678';
 // Leave empty string to hide the WhatsApp option.
 const WHATSAPP_NUMMER = '31641608254';
+const MAIL_ADRES      = 'vandersluisrosalie@outlook.com';

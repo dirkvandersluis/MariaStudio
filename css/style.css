@@ -193,6 +193,13 @@ ul { list-style: none; }
   color: var(--white);
 }
 
+.btn-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.btn-icon svg { flex-shrink: 0; }
+
 /* ============================================================
    HERO-ANIMATIES
    ============================================================ */
@@ -1003,6 +1010,29 @@ ul { list-style: none; }
 }
 .site-footer__ig:hover { color: var(--coral); }
 
+.footer-social {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 0.75rem;
+}
+
+.footer-social__link {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(253,250,246,0.08);
+  color: rgba(253,250,246,0.75);
+  transition: background-color var(--transition), color var(--transition), transform var(--transition);
+}
+.footer-social__link:hover {
+  background-color: var(--coral);
+  color: var(--white);
+  transform: translateY(-2px);
+}
+
 .footer-logo {
   height: 72px;
   width: auto;
@@ -1095,7 +1125,7 @@ ul { list-style: none; }
   .hero__buttons { flex-direction: column; align-items: center; }
 
   .contact-actions { flex-direction: column; align-items: stretch; }
-  .contact-actions .btn { text-align: center; }
+  .contact-actions .btn { justify-content: center; text-align: center; }
 }
 
 @media (max-width: 400px) {
@@ -1614,6 +1644,7 @@ ul { list-style: none; }
     text-align: center;
     align-items: center;
   }
+  .footer-social { justify-content: center; }
 }
 
 /* ============================================================

@@ -78,6 +78,29 @@
           <p class="site-footer__tagline">Handgemaakte kaarten met liefde gemaakt</p>
           <a href="${INSTAGRAM_URL}" target="_blank" rel="noopener noreferrer"
              class="site-footer__ig">@${INSTAGRAM_HANDLE}</a>
+          <div class="footer-social">
+            <a href="${INSTAGRAM_URL}" target="_blank" rel="noopener noreferrer"
+               class="footer-social__link" aria-label="Instagram">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                <circle cx="12" cy="12" r="4"/>
+                <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+              </svg>
+            </a>
+            ${WHATSAPP_NUMMER ? `
+            <a href="https://wa.me/${WHATSAPP_NUMMER}" target="_blank" rel="noopener noreferrer"
+               class="footer-social__link" aria-label="WhatsApp">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+              </svg>
+            </a>` : ''}
+            <a href="mailto:${MAIL_ADRES}" class="footer-social__link" aria-label="Mail">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="4" width="20" height="16" rx="2"/>
+                <path d="m2 6 10 7 10-7"/>
+              </svg>
+            </a>
+          </div>
         </div>
         <nav class="footer-nav" aria-label="Sitemap">
           <a href="index.html">Home</a>
