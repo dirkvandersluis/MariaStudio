@@ -1093,6 +1093,9 @@ ul { list-style: none; }
   .preview-grid { grid-template-columns: repeat(2, 1fr); }
 
   .hero__buttons { flex-direction: column; align-items: center; }
+
+  .contact-actions { flex-direction: column; align-items: stretch; }
+  .contact-actions .btn { text-align: center; }
 }
 
 @media (max-width: 400px) {
@@ -1470,8 +1473,13 @@ ul { list-style: none; }
    ============================================================ */
 .about__text .hero-link { margin-top: 1rem; }
 
-/* Contact Instagram button spacing (vervangt <br><br>) */
-.contact-ig-btn { margin-top: 1.5rem; display: inline-block; }
+/* Contactknoppen (vervangt <br><br>) */
+.contact-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin-top: 1.5rem;
+}
 
 /* ============================================================
    KAARTEN LEEG MELDING

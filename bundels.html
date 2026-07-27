@@ -73,9 +73,8 @@
     document.getElementById('verzend-balk').innerHTML = `
       <p class="verzend-balk__hoofd">Gratis verzending vanaf &euro; ${eur(VERZENDING.GRATIS_VANAF)}</p>
       <p class="verzend-balk__detail">
-        Daaronder rekenen we het PostNL-tarief door:
-        &euro; ${eur(VERZENDING.BRIEFPOST)} voor 1 tot en met ${VERZENDING.KAARTEN_VOOR_PAKJE - 1} kaarten,
-        &euro; ${eur(VERZENDING.BRIEVENBUSPAKJE)} voor ${VERZENDING.KAARTEN_VOOR_PAKJE} kaarten of meer als brievenbuspakje.
+        Daaronder betaal je &euro; ${eur(VERZENDING.EEN_KAART)} verzendkosten voor 1 kaart,
+        of &euro; ${eur(VERZENDING.MEERDERE_KAARTEN)} voor 2 kaarten of meer.
       </p>
     `;
 

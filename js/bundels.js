@@ -1,13 +1,13 @@
 /* ============================================================
    VERZENDKOSTEN
    Pas hier de bedragen aan, de rest van de site rekent hiermee.
-   Tarieven PostNL, stand juli 2026.
+   Simpele regel, stand juli 2026: 1 kaart een tarief, 2 of meer
+   kaarten een ander tarief. Daarboven geldt de gratis-drempel.
    ============================================================ */
 const VERZENDING = {
-  GRATIS_VANAF:        40.00,  // vanaf dit orderbedrag is verzenden gratis
-  BRIEFPOST:            1.70,  // 1 tot en met 4 kaarten, gewone briefpost
-  BRIEVENBUSPAKJE:      3.00,  // 5 kaarten of meer, brievenbuspakje
-  KAARTEN_VOOR_PAKJE:      5   // vanaf dit aantal kaarten geldt het brievenbuspakje
+  GRATIS_VANAF:      40.00,  // vanaf dit orderbedrag is verzenden gratis
+  EEN_KAART:          1.70,  // verzendkosten bij precies 1 kaart
+  MEERDERE_KAARTEN:   3.00   // verzendkosten bij 2 kaarten of meer
 };
 
 /**
@@ -19,9 +19,7 @@ const VERZENDING = {
 function berekenVerzending(aantalKaarten, subtotaal) {
   if (aantalKaarten <= 0) return 0;
   if (subtotaal >= VERZENDING.GRATIS_VANAF) return 0;
-  return aantalKaarten >= VERZENDING.KAARTEN_VOOR_PAKJE
-    ? VERZENDING.BRIEVENBUSPAKJE
-    : VERZENDING.BRIEFPOST;
+  return aantalKaarten === 1 ? VERZENDING.EEN_KAART : VERZENDING.MEERDERE_KAARTEN;
 }
 
 /** Bedrag dat nog nodig is voor gratis verzending, 0 als de drempel al gehaald is. */
