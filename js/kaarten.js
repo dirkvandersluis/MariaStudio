@@ -255,7 +255,7 @@ const kaartData = [
   },
   {
     id: 24,
-    naam: "Hoogbouw",
+    naam: "Zalmhaventoren",
     categorie: "zomaar",
     beschrijving: "Een strakke kaart met een witte lijntekening van een torenflat op diepgroen. Zonder tekst, dus je kunt hem voor elke gelegenheid gebruiken. Met gelijnde achterkant.",
     imgVoor: "img/kaart-24-voor.png",
@@ -299,7 +299,7 @@ const kaartData = [
   },
   {
     id: 28,
-    naam: "Stadsgezicht",
+    naam: "De Rotterdam",
     categorie: "zomaar",
     beschrijving: "Een grafische kaart met een witte lijntekening van kantoorgebouwen op diepgroen. Zonder tekst. Met gelijnde achterkant.",
     imgVoor: "img/kaart-28-voor.jpg",
@@ -310,7 +310,7 @@ const kaartData = [
   },
   {
     id: 31,
-    naam: "Rotterdam",
+    naam: "Roze Watertaxi",
     categorie: "zomaar",
     beschrijving: "Een zwart-wit foto van de Rotterdamse kop van Zuid met een roze ingekleurde watertaxi op de Maas. Met gelijnde achterkant.",
     imgVoor: "img/kaart-31-voor.jpg",
