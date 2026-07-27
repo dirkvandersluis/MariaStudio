@@ -230,9 +230,10 @@ ul { list-style: none; }
 /* ============================================================
    HERO
    ============================================================ */
-/* Body krijgt op de homepage dezelfde kleur als de hero eronder, anders
-   ontstaat er een witte strook rond de zwevende nav-pill tegen de roze. */
-body.home {
+/* Body krijgt op pagina's met een roze hero/page-header dezelfde kleur
+   als die sectie, anders ontstaat er een witte strook rond de zwevende
+   nav-pill tegen de roze. Gebruikt op index, kaarten, bundels en contact. */
+body.blush-top {
   background-color: var(--blush);
 }
 
