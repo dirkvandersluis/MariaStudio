@@ -5,8 +5,8 @@
    ============================================================ */
 const VERZENDING = {
   GRATIS_VANAF:        40.00,  // vanaf dit orderbedrag is verzenden gratis
-  BRIEFPOST:            2.80,  // 1 tot en met 4 kaarten, gewone briefpost
-  BRIEVENBUSPAKJE:      4.39,  // 5 kaarten of meer, brievenbuspakje
+  BRIEFPOST:            1.70,  // 1 tot en met 4 kaarten, gewone briefpost
+  BRIEVENBUSPAKJE:      3.00,  // 5 kaarten of meer, brievenbuspakje
   KAARTEN_VOOR_PAKJE:      5   // vanaf dit aantal kaarten geldt het brievenbuspakje
 };
 
