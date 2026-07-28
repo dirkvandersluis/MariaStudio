@@ -3,14 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact — Maria Studio</title>
+  <title>Contact | Maria Studio</title>
   <meta name="description" content="Neem contact op met Maria Studio. Bestellingen via Instagram DM, betaling via Tikkie.">
 
-  <meta property="og:title" content="Contact — Maria Studio">
+  <meta property="og:title" content="Contact | Maria Studio">
   <meta property="og:description" content="Neem contact op met Maria Studio. Bestellingen via Instagram DM, betaling via Tikkie.">
-  <meta property="og:image" content="img/og-image.svg">
+  <!-- TODO: vervang door echte 1200x630 JPG, een SVG werkt niet als og:image -->
+  <meta property="og:image" content="https://maria-studio.nl/img/kaart-4-voor.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta property="og:type" content="website">
-  <link rel="canonical" href="contact.html">
+  <meta property="og:url" content="https://maria-studio.nl/contact.html">
+  <meta property="og:site_name" content="Maria Studio">
+  <meta property="og:locale" content="nl_NL">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Contact | Maria Studio">
+  <meta name="twitter:description" content="Neem contact op met Maria Studio. Bestellingen via Instagram DM, betaling via Tikkie.">
+  <meta name="twitter:image" content="https://maria-studio.nl/img/kaart-4-voor.png">
+  <link rel="canonical" href="https://maria-studio.nl/contact.html">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -49,7 +59,7 @@
           Bestellingen gaan via Instagram DM. Stuur me een berichtje en ik reageer zo snel mogelijk.
         </p>
 
-        <span class="contact-info__tikkie">Betaling via Tikkie na bevestiging. Gratis verzending vanaf &euro; 40,00, daaronder &euro; 1,70 of &euro; 3,00 PostNL.</span>
+        <span class="contact-info__tikkie">Betaling via Tikkie na bevestiging. Gratis verzending vanaf <span data-cfg="VERZENDING.GRATIS_VANAF"></span>, daaronder <span data-cfg="VERZENDING.EEN_KAART"></span> of <span data-cfg="VERZENDING.MEERDERE_KAARTEN"></span> PostNL.</span>
 
         <div class="contact-actions">
           <a href="https://www.instagram.com/by.rosaliemaria"
@@ -62,7 +72,7 @@
             </svg>
             Stuur een berichtje
           </a>
-          <a href="https://wa.me/31641608254"
+          <a href="https://wa.me/31641608254?text=Hoi%20Rosalie!%20Ik%20heb%20een%20vraag%20over%20jullie%20kaarten."
              target="_blank" rel="noopener noreferrer"
              class="btn btn-secondary btn-icon">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -89,7 +99,7 @@
           Samen kunnen we kijken naar een persoonlijk ontwerp dat helemaal past bij jouw idee.
           Daarna kun je de kaart ook bestellen.
         </p>
-        <p class="pers-card__prijs">&euro; 6,00 per gepersonaliseerde kaart</p>
+        <p class="pers-card__prijs"><span data-cfg="PRIJZEN.GEPERSONALISEERD"></span> per gepersonaliseerde kaart</p>
         <button class="btn btn-secondary bestelling-btn"
                 data-naam="Gepersonaliseerde kaart"
                 data-prijs="6.00"
@@ -104,11 +114,12 @@
   <!-- FOOTER -->
   <footer class="site-footer" id="site-footer"></footer>
 
-  <script src="js/config.js"></script>
-  <script src="js/kaarten.js"></script>
-  <script src="js/bundels.js"></script>
-  <script src="js/instagram.js"></script>
-  <script src="js/mandje.js"></script>
-  <script src="js/components.js"></script>
+  <script src="js/config.js" defer></script>
+  <script src="js/overlay.js" defer></script>
+  <script src="js/kaarten.js" defer></script>
+  <script src="js/bundels.js" defer></script>
+  <script src="js/instagram.js" defer></script>
+  <script src="js/mandje.js" defer></script>
+  <script src="js/components.js" defer></script>
 </body>
 </html>

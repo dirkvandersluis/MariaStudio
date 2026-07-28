@@ -8,9 +8,19 @@
 
   <meta property="og:title" content="Handgemaakte Christelijke Kaarten | Maria Studio">
   <meta property="og:description" content="Handgemaakte bemoedigingskaarten en christelijke kaartjes met Bijbeltekst, vol liefde gemaakt door Rosalie. Gratis verzending vanaf 40 euro.">
-  <meta property="og:image" content="img/og-image.svg">
+  <!-- TODO: vervang door echte 1200x630 JPG, een SVG werkt niet als og:image -->
+  <meta property="og:image" content="https://maria-studio.nl/img/kaart-4-voor.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta property="og:type" content="website">
-  <link rel="canonical" href="index.html">
+  <meta property="og:url" content="https://maria-studio.nl/">
+  <meta property="og:site_name" content="Maria Studio">
+  <meta property="og:locale" content="nl_NL">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Handgemaakte Christelijke Kaarten | Maria Studio">
+  <meta name="twitter:description" content="Handgemaakte bemoedigingskaarten en christelijke kaartjes met Bijbeltekst, vol liefde gemaakt door Rosalie. Gratis verzending vanaf 40 euro.">
+  <meta name="twitter:image" content="https://maria-studio.nl/img/kaart-4-voor.png">
+  <link rel="canonical" href="https://maria-studio.nl/">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,17 +39,19 @@
   <!-- HERO -->
   <section class="hero" id="main">
     <div class="hero__inner">
-      <img src="img/logo-leeg.png" alt="Maria Studio" class="hero-logo fade-up-1" width="408" height="300">
+      <img src="img/logo-leeg.png" alt="Maria Studio" class="hero-logo fade-up-1" width="408" height="300" loading="eager" fetchpriority="high">
       <p class="hero-brand-name fade-up-1">Maria Studio</p>
       <div class="hero-kaarten" aria-hidden="true">
-        <img src="img/kaart-4-voor.png"  alt="" class="hero-kaart hero-kaart--1" width="180" height="225">
-        <img src="img/kaart-17-voor.png" alt="" class="hero-kaart hero-kaart--2" width="180" height="225">
-        <img src="img/kaart-6-voor.png"  alt="" class="hero-kaart hero-kaart--3" width="180" height="225">
+        <img src="img/kaart-4-voor.png"  alt="" class="hero-kaart hero-kaart--1" width="180" height="225" loading="eager" fetchpriority="high">
+        <img src="img/kaart-17-voor.png" alt="" class="hero-kaart hero-kaart--2" width="180" height="225" loading="eager" fetchpriority="high">
+        <img src="img/kaart-6-voor.png"  alt="" class="hero-kaart hero-kaart--3" width="180" height="225" loading="eager" fetchpriority="high">
       </div>
       <h1 class="hero__title fade-up-2">Handgemaakte christelijke kaarten, <br>met liefde gemaakt.</h1>
-      <p class="hero__subtitle fade-up-3">Voor elk moment dat telt. Gratis verzending vanaf &euro; 40,00.</p>
-      <a href="kaarten.html" class="hero-link fade-up-3">Bekijk de kaarten &rarr;</a>
-      <a href="bundels.html" class="hero-link fade-up-3">Bekijk de bundels &rarr;</a>
+      <p class="hero__subtitle fade-up-3">Voor elk moment dat telt. Gratis verzending vanaf <span data-cfg="VERZENDING.GRATIS_VANAF"></span>.</p>
+      <div class="hero__buttons fade-up-3">
+        <a href="kaarten.html" class="btn btn-primary">Bekijk de kaarten</a>
+        <a href="bundels.html" class="hero-link">Bekijk de bundels &rarr;</a>
+      </div>
     </div>
   </section>
 
@@ -87,7 +99,8 @@
     <h2 class="pers-banner__title">Jouw idee, mijn pen.</h2>
     <p class="pers-banner__text">
       Heb je een eigen idee voor een kaart? Laat het me weten en ik maak iets dat helemaal bij
-      jou past. Een gepersonaliseerde kaart kost &euro; 6,00. Gratis verzending vanaf &euro; 40,00.
+      jou past. Een gepersonaliseerde kaart kost <span data-cfg="PRIJZEN.GEPERSONALISEERD"></span>.
+      Gratis verzending vanaf <span data-cfg="VERZENDING.GRATIS_VANAF"></span>.
     </p>
     <a href="contact.html" class="btn btn-primary">
       Bestel een persoonlijke kaart &rarr;
@@ -108,54 +121,63 @@
   <!-- FOOTER -->
   <footer class="site-footer" id="site-footer"></footer>
 
-  <script src="js/config.js"></script>
-  <script src="js/kaarten.js"></script>
-  <script src="js/bundels.js"></script>
-  <script src="js/instagram.js"></script>
-  <script src="js/mandje.js"></script>
-  <script src="js/components.js"></script>
+  <script src="js/config.js" defer></script>
+  <script src="js/overlay.js" defer></script>
+  <script src="js/kaarten.js" defer></script>
+  <script src="js/bundels.js" defer></script>
+  <script src="js/instagram.js" defer></script>
+  <script src="js/mandje.js" defer></script>
+  <script src="js/components.js" defer></script>
   <script>
-    const previewIds = [4, 17, 6];
-    const preview = previewIds.map(id => kaartData.find(k => k.id === id)).filter(Boolean);
-    document.getElementById('kaart-preview').innerHTML = preview.map(kaart => `
-      <div class="card">
-        <a href="kaart-detail.html?id=${kaart.id}">
-          <div class="card-img-wrap">
-            <img src="${kaart.imgVoor}" alt="${kaart.naam}" loading="lazy" width="400" height="500">
-          </div>
-          <div class="card-info">
-            ${kaart.isMiniSet ? '<span class="badge-mini">4 mini-kaartjes</span>' : ''}
-            <h3>${kaart.naam}</h3>
-            <span class="card-price">&euro; ${kaart.prijs.toFixed(2).replace('.', ',')}</span>
-          </div>
-        </a>
-        <button type="button" class="card-add-btn" data-id="${kaart.id}" aria-label="${kaart.naam} toevoegen aan mandje">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
-            <line x1="3" y1="6" x2="21" y2="6"/>
-            <path d="M16 10a4 4 0 01-8 0"/>
-          </svg>
-          In het mandje
-        </button>
-      </div>
-    `).join('');
+    (function () {
+      document.addEventListener('DOMContentLoaded', function () {
+        // Andere kaarten dan de drie in de hero hierboven, zodat er geen overlap is.
+        const previewIds = [1, 18, 32];
+        const preview = previewIds.map(id => kaartData.find(k => k.id === id)).filter(Boolean);
+        document.getElementById('kaart-preview').innerHTML = preview.map(kaart => {
+          const uitverkocht = kaart.voorraad === 0;
+          return `
+          <div class="card ${uitverkocht ? 'card--uitverkocht' : ''}">
+            <a href="kaarten/${kaart.slug}.html">
+              <div class="card-img-wrap">
+                <img src="${kaart.imgVoor}" alt="${kaart.naam}" loading="lazy" width="400" height="500">
+              </div>
+              <div class="card-info">
+                ${kaart.isMiniSet ? '<span class="badge-mini">4 mini-kaartjes</span>' : ''}
+                ${voorraadBadgeHtml(kaart)}
+                <h3>${kaart.naam}</h3>
+                <span class="card-price">${formatEuro(kaart.prijs)}</span>
+              </div>
+            </a>
+            <button type="button" class="card-add-btn" data-id="${kaart.id}" aria-label="${kaart.naam} toevoegen aan mandje" ${uitverkocht ? 'disabled' : ''}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+                <line x1="3" y1="6" x2="21" y2="6"/>
+                <path d="M16 10a4 4 0 01-8 0"/>
+              </svg>
+              ${uitverkocht ? 'Uitverkocht' : 'In het mandje'}
+            </button>
+          </div>`;
+        }).join('');
 
-    // Fallback voor ontbrekende preview-afbeeldingen
-    document.querySelectorAll('#kaart-preview .card-img-wrap img').forEach(img => {
-      img.addEventListener('error', function () {
-        this.style.display = 'none';
-        this.closest('.card-img-wrap').style.background = '#E6A69D';
+        // Fallback voor ontbrekende preview-afbeeldingen
+        document.querySelectorAll('#kaart-preview .card-img-wrap img').forEach(img => {
+          img.addEventListener('error', function () {
+            this.style.display = 'none';
+            this.closest('.card-img-wrap').style.background = '#E6A69D';
+          });
+        });
+
+        // Direct toevoegen aan mandje vanaf de homepage-preview, zonder door te klikken
+        document.querySelectorAll('#kaart-preview .card-add-btn').forEach(btn => {
+          btn.addEventListener('click', () => voegToeAanMandje(parseInt(btn.dataset.id, 10)));
+        });
+
+        document.querySelectorAll('.hero-kaart').forEach(img => {
+          img.addEventListener('error', function () { this.style.display = 'none'; });
+        });
       });
-    });
-
-    // Direct toevoegen aan mandje vanaf de homepage-preview, zonder door te klikken
-    document.querySelectorAll('#kaart-preview .card-add-btn').forEach(btn => {
-      btn.addEventListener('click', () => voegToeAanMandje(parseInt(btn.dataset.id, 10)));
-    });
-
-    document.querySelectorAll('.hero-kaart').forEach(img => {
-      img.addEventListener('error', function () { this.style.display = 'none'; });
-    });
+    })();
   </script>
 </body>
 </html>

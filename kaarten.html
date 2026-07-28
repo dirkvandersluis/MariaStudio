@@ -3,14 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kaarten — Maria Studio</title>
+  <title>Kaarten | Maria Studio</title>
+  <!-- prijzen handmatig bijwerken als config.js wijzigt -->
   <meta name="description" content="Alle handgemaakte kaarten van Maria Studio. Prijs: 2,50 per kaart. Gratis verzending vanaf 40 euro.">
 
-  <meta property="og:title" content="Kaarten — Maria Studio">
+  <meta property="og:title" content="Kaarten | Maria Studio">
+  <!-- prijzen handmatig bijwerken als config.js wijzigt -->
   <meta property="og:description" content="Alle handgemaakte kaarten van Maria Studio. Prijs: 2,50 per kaart. Gratis verzending vanaf 40 euro.">
-  <meta property="og:image" content="img/og-image.svg">
+  <!-- TODO: vervang door echte 1200x630 JPG, een SVG werkt niet als og:image -->
+  <meta property="og:image" content="https://maria-studio.nl/img/kaart-4-voor.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta property="og:type" content="website">
-  <link rel="canonical" href="kaarten.html">
+  <meta property="og:url" content="https://maria-studio.nl/kaarten.html">
+  <meta property="og:site_name" content="Maria Studio">
+  <meta property="og:locale" content="nl_NL">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Kaarten | Maria Studio">
+  <!-- prijzen handmatig bijwerken als config.js wijzigt -->
+  <meta name="twitter:description" content="Alle handgemaakte kaarten van Maria Studio. Prijs: 2,50 per kaart. Gratis verzending vanaf 40 euro.">
+  <meta name="twitter:image" content="https://maria-studio.nl/img/kaart-4-voor.png">
+  <link rel="canonical" href="https://maria-studio.nl/kaarten.html">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,22 +43,16 @@
   <header class="page-header" id="main">
     <h1 class="page-header__title">De kaarten</h1>
     <p class="page-header__subtitle">
-      Elk kaartje is met de hand ontworpen. Prijs: &euro; 2,50 per kaart. Gratis verzending vanaf &euro; 40,00.
-      <br><a href="bundels.html" class="page-header__link">Meerdere kaarten nodig? Bekijk de bundels vanaf &euro; 2,00 per kaart.</a>
+      Elk kaartje is met de hand ontworpen. Prijs: <span data-cfg="PRIJZEN.LOS"></span> per kaart. Gratis verzending vanaf <span data-cfg="VERZENDING.GRATIS_VANAF"></span>.
+      <br><a href="bundels.html" class="page-header__link">Meerdere kaarten nodig? Bekijk de bundels vanaf <span data-cfg="MIN_KAART_PRIJS_IN_BUNDEL"></span> per kaart.</a>
     </p>
-    <p class="bemoediging-quote" id="bemoediging-quote" style="display:none">
+    <p class="bemoediging-quote is-hidden" id="bemoediging-quote">
       "Want ik ben ervan overtuigd dat noch dood noch leven&hellip; ons kan scheiden van de liefde van God." &mdash; Romeinen 8:38-39
     </p>
   </header>
 
-  <!-- FILTERBALK -->
-  <div class="filter-bar" role="group" aria-label="Filter op categorie">
-    <button class="filter-btn active" data-filter="alles">Alles</button>
-    <button class="filter-btn" data-filter="verjaardag">Verjaardag</button>
-    <button class="filter-btn" data-filter="bemoediging">Christelijk</button>
-<button class="filter-btn" data-filter="liefde">Liefde</button>
-    <button class="filter-btn" data-filter="zomaar">Zomaar</button>
-  </div>
+  <!-- FILTERBALK (knoppen worden gegenereerd vanuit kaartData, zie script) -->
+  <div class="filter-bar" role="group" aria-label="Filter op categorie" id="filter-bar"></div>
 
   <!-- KAARTENRASTER -->
   <section class="cards-section">
@@ -63,8 +70,8 @@
     <h2 class="custom-section__title">Eigen idee?</h2>
     <p class="custom-section__text">
       Heb je zelf een idee voor een kaart? Stuur me een berichtje en samen kijken we naar een
-      ontwerp dat helemaal past bij jouw idee. Een gepersonaliseerde kaart kost &euro; 6,00.
-      Gratis verzending vanaf &euro; 40,00.
+      ontwerp dat helemaal past bij jouw idee. Een gepersonaliseerde kaart kost <span data-cfg="PRIJZEN.GEPERSONALISEERD"></span>.
+      Gratis verzending vanaf <span data-cfg="VERZENDING.GRATIS_VANAF"></span>.
     </p>
     <button class="btn btn-primary bestelling-btn"
             data-naam="Gepersonaliseerde kaart"
@@ -77,15 +84,29 @@
   <!-- FOOTER -->
   <footer class="site-footer" id="site-footer"></footer>
 
-  <script src="js/config.js"></script>
-  <script src="js/kaarten.js"></script>
-  <script src="js/bundels.js"></script>
-  <script src="js/instagram.js"></script>
-  <script src="js/mandje.js"></script>
-  <script src="js/components.js"></script>
+  <script src="js/config.js" defer></script>
+  <script src="js/overlay.js" defer></script>
+  <script src="js/kaarten.js" defer></script>
+  <script src="js/bundels.js" defer></script>
+  <script src="js/instagram.js" defer></script>
+  <script src="js/mandje.js" defer></script>
+  <script src="js/components.js" defer></script>
   <script>
+  (function () {
+    document.addEventListener('DOMContentLoaded', function () {
     const container = document.getElementById('cards-grid');
+    const filterBar  = document.getElementById('filter-bar');
     const placeholderKleuren = ['#E77E7A','#476048','#E6A69D','#8398C9','#E9E1B5','#E77E7A'];
+
+    /* ---- FILTERBALK OPBOUWEN --------------------------------------------
+       Categorieen komen rechtstreeks uit kaartData, dus een nieuwe
+       categorie in kaartData verschijnt vanzelf hier. Labels komen uit
+       CATEGORIE_LABELS in js/config.js. ------------------------------- */
+    const categorieen = [...new Set(kaartData.map(k => k.categorie))];
+    const geldigeFilters = ['alles', ...categorieen];
+
+    filterBar.innerHTML = '<button class="filter-btn" data-filter="alles">Alles</button>' +
+      categorieen.map(cat => `<button class="filter-btn" data-filter="${cat}">${CATEGORIE_LABELS[cat] || cat}</button>`).join('');
 
     function renderKaarten(filter) {
       const gefilterd = kaartData.filter(k => !k.verborgen && (filter === 'alles' || k.categorie === filter));
@@ -95,20 +116,23 @@
         return;
       }
 
-      container.innerHTML = gefilterd.map((kaart, i) => `
-        <div class="card" data-category="${kaart.categorie}">
-          <a href="kaart-detail.html?id=${kaart.id}">
+      container.innerHTML = gefilterd.map((kaart, i) => {
+        const uitverkocht = kaart.voorraad === 0;
+        return `
+        <div class="card ${uitverkocht ? 'card--uitverkocht' : ''}" data-category="${kaart.categorie}">
+          <a href="kaarten/${kaart.slug}.html">
             <div class="card-img-wrap">
               <img src="${kaart.imgVoor}" alt="${kaart.naam}" loading="lazy" width="400" height="500">
             </div>
             <div class="card-info">
               ${kaart.isMiniSet ? '<span class="badge-mini">4 mini-kaartjes</span>' : ''}
+              ${voorraadBadgeHtml(kaart)}
               <h3>${kaart.naam}</h3>
-              <span class="card-price">&euro; ${kaart.prijs.toFixed(2).replace('.', ',')}</span>
+              <span class="card-price">${formatEuro(kaart.prijs)}</span>
             </div>
           </a>
-        </div>
-      `).join('');
+        </div>`;
+      }).join('');
 
       // Fallback voor ontbrekende afbeeldingen
       container.querySelectorAll('.card-img-wrap img').forEach((img, i) => {
@@ -122,17 +146,31 @@
 
     const quote = document.getElementById('bemoediging-quote');
 
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const filter = btn.dataset.filter;
-        renderKaarten(filter);
-        if (quote) quote.style.display = filter === 'bemoediging' ? 'block' : 'none';
+    /* ---- FILTER IN DE URL --------------------------------------------- */
+    function pasFilterToe(filter, updateUrl) {
+      document.querySelectorAll('.filter-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.filter === filter);
       });
+      renderKaarten(filter);
+      if (quote) quote.classList.toggle('is-hidden', filter !== 'bemoediging');
+
+      if (updateUrl) {
+        const url = new URL(window.location.href);
+        if (filter === 'alles') url.searchParams.delete('categorie');
+        else url.searchParams.set('categorie', filter);
+        history.replaceState(null, '', url);
+      }
+    }
+
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => pasFilterToe(btn.dataset.filter, true));
     });
 
-    renderKaarten('alles');
+    const catUitUrl = new URLSearchParams(window.location.search).get('categorie');
+    const startFilter = geldigeFilters.includes(catUitUrl) ? catUitUrl : 'alles';
+    pasFilterToe(startFilter, false);
+    });
+  })();
   </script>
 </body>
 </html>

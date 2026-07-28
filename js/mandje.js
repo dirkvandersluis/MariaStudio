@@ -1,9 +1,5 @@
 const MANDJE_KEY = 'mariastudio_mandje';
 
-function euro(bedrag) {
-  return bedrag.toFixed(2).replace('.', ',');
-}
-
 function getMandjeData() {
   try {
     return JSON.parse(localStorage.getItem(MANDJE_KEY)) || [];
@@ -154,7 +150,7 @@ function toonMandje() {
       <div class="mandje-popup">
         <button class="dm-sluit" aria-label="Sluiten">&#x2715;</button>
         <p class="dm-titel">Je mandje is leeg</p>
-        <a href="kaarten.html" class="mandje-leeg-link">Bekijk alle kaarten</a>
+        <a href="${SITE_BASIS}kaarten.html" class="mandje-leeg-link">Bekijk alle kaarten</a>
       </div>`;
     leeg.querySelector('.dm-sluit').addEventListener('click', () => leeg.remove());
     leeg.addEventListener('click', e => { if (e.target === leeg) leeg.remove(); });
@@ -167,7 +163,7 @@ function toonMandje() {
   const regels = mandje.map(item => ({ item, info: regelInfo(item) })).filter(r => r.info);
 
   const berichtRegels = regels.map(({ item, info }) => {
-    const regel = `- ${info.naam} x${item.aantal} (€ ${euro(info.prijs * item.aantal)})`;
+    const regel = `- ${info.naam} x${item.aantal} (${formatEuro(info.prijs * item.aantal)})`;
     return info.isBundel && info.kaarten.length
       ? regel + '\n' + info.kaarten.map(n => `    * ${n}`).join('\n')
       : regel;
@@ -175,15 +171,15 @@ function toonMandje() {
 
   const verzendRegel = t.verzending === 0
     ? 'Verzending: gratis'
-    : `Verzending: € ${euro(t.verzending)}`;
+    : `Verzending: ${formatEuro(t.verzending)}`;
 
   const volledigBericht =
     `Hoi Rosalie! Ik wil graag het volgende bestellen:\n${berichtRegels}\n` +
-    `Subtotaal: € ${euro(t.subtotaal)}\n${verzendRegel}\nTotaal: € ${euro(t.totaal)}\n\n` +
+    `Subtotaal: ${formatEuro(t.subtotaal)}\n${verzendRegel}\nTotaal: ${formatEuro(t.totaal)}\n\n` +
     `Kun je me laten weten of alles beschikbaar is?`;
 
   const gratisBalk = t.tekort > 0
-    ? `<p class="mandje-gratis-melding">Nog <strong>&euro;&nbsp;${euro(t.tekort)}</strong> tot gratis verzending.</p>`
+    ? `<p class="mandje-gratis-melding">Nog <strong>${formatEuro(t.tekort)}</strong> tot gratis verzending.</p>`
     : `<p class="mandje-gratis-melding mandje-gratis-behaald">Je bestelling wordt gratis verzonden.</p>`;
 
   const overlay = document.createElement('div');
@@ -208,7 +204,7 @@ function toonMandje() {
                 <span class="mandje-aantal">${item.aantal}</span>
                 <button class="mandje-plus" data-id="${item.id}" aria-label="${info.naam} plus">+</button>
               </div>
-              <span class="mandje-item-prijs">&euro;&nbsp;${euro(info.prijs * item.aantal)}</span>
+              <span class="mandje-item-prijs">${formatEuro(info.prijs * item.aantal)}</span>
               <button class="mandje-verwijder" data-id="${item.id}" aria-label="${info.naam} verwijderen">&#x2715;</button>
             </div>
           </li>`).join('')}
@@ -217,15 +213,15 @@ function toonMandje() {
       <div class="mandje-kosten">
         <div class="mandje-kosten-regel">
           <span>Subtotaal (${t.aantalKaarten} kaart${t.aantalKaarten === 1 ? '' : 'en'})</span>
-          <span>&euro;&nbsp;${euro(t.subtotaal)}</span>
+          <span>${formatEuro(t.subtotaal)}</span>
         </div>
         <div class="mandje-kosten-regel">
           <span>Verzending</span>
-          <span>${t.verzending === 0 ? 'gratis' : '&euro;&nbsp;' + euro(t.verzending)}</span>
+          <span>${t.verzending === 0 ? 'gratis' : formatEuro(t.verzending)}</span>
         </div>
         <div class="mandje-kosten-regel mandje-totaal">
           <span>Totaal</span>
-          <span>&euro;&nbsp;${euro(t.totaal)}</span>
+          <span>${formatEuro(t.totaal)}</span>
         </div>
       </div>
 

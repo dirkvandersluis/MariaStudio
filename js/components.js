@@ -2,8 +2,9 @@
   // INSTAGRAM_HANDLE and INSTAGRAM_URL are defined in js/config.js
 
   // Determine active page from pathname
+  // SITE_BASIS is gedefinieerd in js/config.js
   const path = window.location.pathname;
-  const pagina = path.includes('kaarten.html') || path.includes('kaart-detail.html')
+  const pagina = path.includes('kaarten.html') || path.includes('kaart-detail.html') || path.includes('/kaarten/')
     ? 'kaarten'
     : path.includes('bundels.html')
       ? 'bundels'
@@ -21,18 +22,18 @@
     navEl.setAttribute('role', 'navigation');
     navEl.setAttribute('aria-label', 'Hoofdnavigatie');
     navEl.innerHTML = `
-      <a href="index.html" class="nav-logo-link">
-        <img src="img/logo-leeg.png" alt="Maria Studio" class="nav-logo" width="112" height="82">
+      <a href="${SITE_BASIS}index.html" class="nav-logo-link">
+        <img src="${SITE_BASIS}img/logo-leeg.png" alt="Maria Studio" class="nav-logo" width="112" height="82">
       </a>
       <div class="nav-right">
         <button class="nav-hamburger" id="hamburger" aria-label="Menu openen" aria-expanded="false">
           <span></span><span></span><span></span>
         </button>
         <ul class="nav-links" id="nav-links">
-          <li><a href="index.html"${actief('home')}>Home</a></li>
-          <li><a href="kaarten.html"${actief('kaarten')}>Kaarten</a></li>
-          <li><a href="bundels.html"${actief('bundels')}>Bundels</a></li>
-          <li><a href="contact.html"${actief('contact')}>Contact</a></li>
+          <li><a href="${SITE_BASIS}index.html"${actief('home')}>Home</a></li>
+          <li><a href="${SITE_BASIS}kaarten.html"${actief('kaarten')}>Kaarten</a></li>
+          <li><a href="${SITE_BASIS}bundels.html"${actief('bundels')}>Bundels</a></li>
+          <li><a href="${SITE_BASIS}contact.html"${actief('contact')}>Contact</a></li>
         </ul>
         <a href="${INSTAGRAM_URL}" target="_blank" rel="noopener noreferrer"
            class="nav-insta" aria-label="Instagram">
@@ -103,17 +104,17 @@
           </div>
         </div>
         <nav class="footer-nav" aria-label="Sitemap">
-          <a href="index.html">Home</a>
-          <a href="kaarten.html">Kaarten</a>
-          <a href="bundels.html">Bundels</a>
-          <a href="contact.html">Contact</a>
+          <a href="${SITE_BASIS}index.html">Home</a>
+          <a href="${SITE_BASIS}kaarten.html">Kaarten</a>
+          <a href="${SITE_BASIS}bundels.html">Bundels</a>
+          <a href="${SITE_BASIS}contact.html">Contact</a>
         </nav>
         <div class="footer-col footer-info">
           <p>Formaat: 10,5 x 14,8 cm (A6)</p>
-          <p>Prijs: &euro; ${LOSSE_KAART_PRIJS.toFixed(2).replace('.', ',')} per kaart</p>
-          <p>Bundels: vanaf &euro; ${MIN_KAART_PRIJS_IN_BUNDEL.toFixed(2).replace('.', ',')} per kaart</p>
-          <p>Gepersonaliseerd: &euro; 6,00</p>
-          <p>Verzending: gratis vanaf &euro; ${VERZENDING.GRATIS_VANAF.toFixed(2).replace('.', ',')}</p>
+          <p>Prijs: ${formatEuro(PRIJZEN.LOS)} per kaart</p>
+          <p>Bundels: vanaf ${formatEuro(MIN_KAART_PRIJS_IN_BUNDEL)} per kaart</p>
+          <p>Gepersonaliseerd: ${formatEuro(PRIJZEN.GEPERSONALISEERD)}</p>
+          <p>Verzending: gratis vanaf ${formatEuro(VERZENDING.GRATIS_VANAF)}</p>
           <!-- KVK-nummer toevoegen zodra ingeschreven -->
         </div>
       </div>
@@ -125,10 +126,12 @@
     `;
   }
 
-  // ---- ESCAPE sluit popups -----------------------------------------------
+  // ---- ESCAPE sluit popups -------------------------------------------------
+  // .lightbox-overlay en .kiezer-overlay regelen Escape zelf via js/overlay.js
+  // (inclusief focus trap en scroll lock), die twee staan hier bewust niet in.
   document.addEventListener('keydown', function (e) {
     if (e.key !== 'Escape') return;
-    const overlay = document.querySelector('.dm-overlay, .mandje-overlay, .lightbox-overlay, .kiezer-overlay');
+    const overlay = document.querySelector('.dm-overlay, .mandje-overlay');
     if (overlay) overlay.remove();
   });
 

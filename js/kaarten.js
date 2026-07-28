@@ -1,7 +1,9 @@
 const kaartData = [
   {
     id: 1,
+    voorraad: null,
     naam: "Nothing was lost if Jesus was gained",
+    slug: "nothing-was-lost-if-jesus-was-gained",
     categorie: "bemoediging",
     beschrijving: "Een bemoedigende kaart met handlettering op een felrode achtergrond. Met een gelijnde achterkant om zelf een persoonlijk berichtje te schrijven.",
     imgVoor: "img/kaart-1-voor.png",
@@ -12,8 +14,10 @@ const kaartData = [
   },
   {
     id: 2,
+    voorraad: null,
     verborgen: true,
     naam: "Happy birthday",
+    slug: "happy-birthday",
     categorie: "verjaardag",
     beschrijving: "Een vrolijke verjaardagskaart met kleurrijke letters en een slingerillustratie op bordeauxrode achtergrond. Met gelijnde achterkant.",
     imgVoor: "img/kaart-2-voor.png",
@@ -24,7 +28,9 @@ const kaartData = [
   },
   {
     id: 3,
+    voorraad: null,
     naam: "There's joy in the house of our Lord",
+    slug: "there-s-joy-in-the-house-of-our-lord",
     categorie: "bemoediging",
     beschrijving: "Een speelse kaart met kleurrijke handlettering op felroze achtergrond. Met gelijnde achterkant om zelf iets bij te schrijven.",
     imgVoor: "img/kaart-3-voor.png",
@@ -35,7 +41,9 @@ const kaartData = [
   },
   {
     id: 4,
+    voorraad: null,
     naam: "I will dwell in the house of the Lord forever",
+    slug: "i-will-dwell-in-the-house-of-the-lord-forever",
     categorie: "bemoediging",
     beschrijving: "Een stijlvolle kaart met Psalm 23 op een vrolijk gestreepte achtergrond in roze en groen. Met lichtroze gelijnde achterkant.",
     imgVoor: "img/kaart-4-voor.png",
@@ -46,8 +54,10 @@ const kaartData = [
   },
   {
     id: 5,
+    voorraad: null,
     verborgen: true,
     naam: "Het verloren schaap",
+    slug: "het-verloren-schaap",
     categorie: "bemoediging",
     beschrijving: "Een lieve kaart met een schaapje, gebaseerd op de gelijkenis van het verloren schaap. Met hot pink rand en gelijnde achterkant.",
     imgVoor: "img/kaart-5-voor.png",
@@ -58,7 +68,9 @@ const kaartData = [
   },
   {
     id: 6,
+    voorraad: null,
     naam: "If God is for us, who can be against us?",
+    slug: "if-god-is-for-us-who-can-be-against-us",
     categorie: "bemoediging",
     beschrijving: "Een bemoedigende kaart met handlettering en een sierlijk kader op felroze achtergrond. Gebaseerd op Romeinen 8:31. Met een koraalrode gelijnde achterkant om zelf een persoonlijk berichtje te schrijven.",
     imgVoor: "img/kaart-6-voor.png",
@@ -69,8 +81,10 @@ const kaartData = [
   },
   {
     id: 7,
+    voorraad: null,
     verborgen: true,
     naam: "I love you so much",
+    slug: "i-love-you-so-much",
     categorie: "liefde",
     beschrijving: "Een lieve kaart met een gele envelop, handgeschreven 'I love you so much' en blauwe bloemen op een felrode achtergrond. Met lichtroze gelijnde achterkant.",
     imgVoor: "img/kaart-7-voor.png",
@@ -81,8 +95,10 @@ const kaartData = [
   },
   {
     id: 8,
+    voorraad: null,
     verborgen: true,
     naam: "Koelkast",
+    slug: "koelkast",
     categorie: "zomaar",
     beschrijving: "Een vrolijke kaart met een groene retro koelkast met gele en rode post-its op een felrode achtergrond. Met lichtroze gelijnde achterkant.",
     imgVoor: "img/kaart-8-voor.png",
@@ -93,8 +109,10 @@ const kaartData = [
   },
   {
     id: 9,
+    voorraad: null,
     verborgen: true,
     naam: "Kandelaar",
+    slug: "kandelaar",
     categorie: "zomaar",
     beschrijving: "Een elegante kaart met een roze kandelaar met drie brandende kaarsen op een zachte gele achtergrond. Met lichtroze gelijnde achterkant.",
     imgVoor: "img/kaart-9-voor.png",
@@ -105,7 +123,9 @@ const kaartData = [
   },
   {
     id: 10,
+    voorraad: null,
     naam: "Grachtenpand",
+    slug: "grachtenpand",
     categorie: "zomaar",
     beschrijving: "Een stijlvolle kaart met een gouden lijntekening van een grachtenpand op een felrode achtergrond. Met lichtroze gelijnde achterkant.",
     imgVoor: "img/kaart-10-voor.png",
@@ -116,7 +136,9 @@ const kaartData = [
   },
   {
     id: 11,
+    voorraad: null,
     naam: "Mumderful",
+    slug: "mumderful",
     categorie: "moeder",
     beschrijving: "Een vrolijke kaart voor een bijzondere moeder. 'Mumderful' in een sierlijk roze kader op een rood-roze gestreepte achtergrond. Met felrode gelijnde achterkant.",
     imgVoor: "img/kaart-11-voor.png",
@@ -127,7 +149,9 @@ const kaartData = [
   },
   {
     id: 12,
+    voorraad: null,
     naam: "Bloemenpracht",
+    slug: "bloemenpracht",
     categorie: "zomaar",
     beschrijving: "Een vrolijke kaart met een dicht blauw bloemenpatroon over de hele kaart op een felrode achtergrond. Met felrode gelijnde achterkant.",
     imgVoor: "img/kaart-12-voor.png",
@@ -138,7 +162,9 @@ const kaartData = [
   },
   {
     id: 13,
+    voorraad: null,
     naam: "True rest is found in the Lord",
+    slug: "true-rest-is-found-in-the-lord",
     categorie: "bemoediging",
     beschrijving: "Een rustgevende kaart met handlettering en een schommelstoel illustratie op bordeauxrode achtergrond. Met lichtroze gelijnde achterkant.",
     imgVoor: "img/kaart-13-voor.png",
@@ -149,8 +175,10 @@ const kaartData = [
   },
   {
     id: 14,
+    voorraad: null,
     verborgen: true,
     naam: "Be living proof of a living God",
+    slug: "be-living-proof-of-a-living-god",
     categorie: "bemoediging",
     beschrijving: "Een krachtige kaart met roze handlettering op een donkere bordeauxrode achtergrond. Met bordeauxrode gelijnde achterkant.",
     imgVoor: "img/kaart-14-voor.png",
@@ -161,8 +189,10 @@ const kaartData = [
   },
   {
     id: 15,
+    voorraad: null,
     verborgen: true,
     naam: "My fav place is anywhere with you",
+    slug: "my-fav-place-is-anywhere-with-you",
     categorie: "liefde",
     beschrijving: "Een romantische kaart met roze handlettering in een groot hart op een donkerblauwe achtergrond. Met bordeauxpaarse gelijnde achterkant.",
     imgVoor: "img/kaart-15-voor.png",
@@ -173,8 +203,10 @@ const kaartData = [
   },
   {
     id: 16,
+    voorraad: null,
     verborgen: true,
     naam: "Mini-kaartjesset: Sit with Jesus",
+    slug: "mini-kaartjesset-sit-with-jesus",
     categorie: "bemoediging",
     beschrijving: "Een set van 4 mini-kaartjes, elk een kwart van een normaal kaartformaat (5,85 x 9,1 cm). De set bevat: 'Sit with Jesus', 'And if not, He is still good', 'You, Lord, are a shield around me (Psalm 3:3)' en 'Jesus first'. Je ontvangt 4 losse mini-kaartjes, al uitgeknipt en klaar om te versturen.",
     imgVoor: "img/kaart-16-voor.png",
@@ -187,7 +219,9 @@ const kaartData = [
   },
   {
     id: 17,
+    voorraad: null,
     naam: "He can do a lot with a little",
+    slug: "he-can-do-a-lot-with-a-little",
     categorie: "bemoediging",
     beschrijving: "Een bemoedigende kaart met rode handlettering en een illustratie van een schaal met brood en vis op een zachte gele achtergrond.",
     imgVoor: "img/kaart-17-voor.png",
@@ -198,7 +232,9 @@ const kaartData = [
   },
   {
     id: 18,
+    voorraad: null,
     naam: "I will climb this mountain with my eyes fixed only on You",
+    slug: "i-will-climb-this-mountain-with-my-eyes-fixed-only-on-you",
     categorie: "bemoediging",
     beschrijving: "Een bemoedigende kaart met fijne handlettering in rosegoud op een diep donkerbruine achtergrond. Voor iemand die voor een zware opgave staat. Met gelijnde achterkant om zelf een berichtje te schrijven.",
     imgVoor: "img/kaart-18-voor.png",
@@ -209,7 +245,9 @@ const kaartData = [
   },
   {
     id: 19,
+    voorraad: null,
     naam: "Vul dit huis met Uw glorie",
+    slug: "vul-dit-huis-met-uw-glorie",
     categorie: "zomaar",
     beschrijving: "Een warme kaart met bruin krulschrift op koraalrood. Mooi als kaart bij een verhuizing, een nieuwe woning of een housewarming. Met gelijnde achterkant.",
     imgVoor: "img/kaart-19-voor.png",
@@ -220,8 +258,10 @@ const kaartData = [
   },
   {
     id: 21,
+    voorraad: null,
     verborgen: true,
     naam: "Here I am Lord, send me",
+    slug: "here-i-am-lord-send-me",
     categorie: "bemoediging",
     beschrijving: "Een kaart met roze handlettering en de omtrek van Zuid-Afrika op olijfbruin. Gemaakt voor wie op zending gaat of een nieuwe roeping volgt. Met gelijnde achterkant.",
     imgVoor: "img/kaart-21-voor.png",
@@ -232,7 +272,9 @@ const kaartData = [
   },
   {
     id: 22,
+    voorraad: null,
     naam: "Everything I have I owe to God",
+    slug: "everything-i-have-i-owe-to-god",
     categorie: "bemoediging",
     beschrijving: "Een kaart met een patroon van zes roze sierkruisen op donkerbruin, met de tekst onderaan. Een stille kaart over dankbaarheid. Met gelijnde achterkant.",
     imgVoor: "img/kaart-22-voor.png",
@@ -243,8 +285,10 @@ const kaartData = [
   },
   {
     id: 23,
+    voorraad: null,
     verborgen: true,
     naam: "Hineni",
+    slug: "hineni",
     categorie: "bemoediging",
     beschrijving: "Het Hebreeuwse woord voor 'hier ben ik' uit Genesis 22, in groot roze schrift op bijna zwart groen. Over beschikbaar zijn voor God. Met gelijnde achterkant.",
     imgVoor: "img/kaart-23-voor.png",
@@ -255,7 +299,9 @@ const kaartData = [
   },
   {
     id: 24,
+    voorraad: null,
     naam: "Zalmhaventoren",
+    slug: "zalmhaventoren",
     categorie: "zomaar",
     beschrijving: "Een strakke kaart met een witte lijntekening van een torenflat op diepgroen. Zonder tekst, dus je kunt hem voor elke gelegenheid gebruiken. Met gelijnde achterkant.",
     imgVoor: "img/kaart-24-voor.png",
@@ -266,7 +312,9 @@ const kaartData = [
   },
   {
     id: 25,
+    voorraad: null,
     naam: "Heer, wijs mij Uw weg",
+    slug: "heer-wijs-mij-uw-weg",
     categorie: "bemoediging",
     beschrijving: "Dun koperkleurig schrift op donkerblauw. Een ingetogen kaart voor iemand die voor een keuze staat, bijvoorbeeld bij een studiekeuze of een nieuwe stap. Met gelijnde achterkant.",
     imgVoor: "img/kaart-25-voor.png",
@@ -277,7 +325,9 @@ const kaartData = [
   },
   {
     id: 26,
+    voorraad: null,
     naam: "U bent met al mijn wegen vertrouwd",
+    slug: "u-bent-met-al-mijn-wegen-vertrouwd",
     categorie: "bemoediging",
     beschrijving: "Psalm 139 in roze kwastschrift op olijfbruin. Een kaart die troost geeft aan iemand die het even niet meer weet. Met gelijnde achterkant.",
     imgVoor: "img/kaart-26-voor.png",
@@ -288,7 +338,9 @@ const kaartData = [
   },
   {
     id: 27,
+    voorraad: null,
     naam: "Bloemenpatroon",
+    slug: "bloemenpatroon",
     categorie: "zomaar",
     beschrijving: "Een vrolijke kaart met een doorlopend blauw bloemenpatroon op karmijnrood. Zonder tekst, dus geschikt voor elk moment. Met gelijnde achterkant.",
     imgVoor: "img/kaart-27-voor.jpg",
@@ -299,7 +351,9 @@ const kaartData = [
   },
   {
     id: 28,
+    voorraad: null,
     naam: "De Rotterdam",
+    slug: "de-rotterdam",
     categorie: "zomaar",
     beschrijving: "Een grafische kaart met een witte lijntekening van kantoorgebouwen op diepgroen. Zonder tekst. Met gelijnde achterkant.",
     imgVoor: "img/kaart-28-voor.jpg",
@@ -310,7 +364,9 @@ const kaartData = [
   },
   {
     id: 31,
+    voorraad: null,
     naam: "Roze Watertaxi",
+    slug: "roze-watertaxi",
     categorie: "zomaar",
     beschrijving: "Een zwart-wit foto van de Rotterdamse kop van Zuid met een roze ingekleurde watertaxi op de Maas. Met gelijnde achterkant.",
     imgVoor: "img/kaart-31-voor.jpg",
@@ -321,7 +377,9 @@ const kaartData = [
   },
   {
     id: 32,
+    voorraad: null,
     naam: "Boeket",
+    slug: "boeket",
     categorie: "zomaar",
     beschrijving: "Een line-art tekening van een bloemenboeket in koraalrood op een donkere achtergrond, gesigneerd met het Maria Studio logo. Zonder tekst, dus geschikt voor elke gelegenheid. Met gelijnde achterkant.",
     imgVoor: "img/kaart-32-voor.png",
@@ -332,14 +390,33 @@ const kaartData = [
   }
 ];
 
+/**
+ * Badge-HTML voor de voorraad van een kaart: "Uitverkocht" bij 0, "Nog X"
+ * bij 1 t/m 3, en niets bij null (onbeperkt) of 4 en hoger.
+ */
+function voorraadBadgeHtml(kaart) {
+  if (kaart.voorraad === 0) return '<span class="badge-voorraad badge-voorraad--uit">Uitverkocht</span>';
+  if (kaart.voorraad != null && kaart.voorraad >= 1 && kaart.voorraad <= 3) {
+    return `<span class="badge-voorraad badge-voorraad--laag">Nog ${kaart.voorraad}</span>`;
+  }
+  return '';
+}
+
 /*
   KAART TOEVOEGEN:
   1. Zet de voorkant in img/ als kaart-N-voor.png (of .jpg)
-  2. Kopieer een object hierboven en pas id, naam, categorie, beschrijving en imgVoor aan.
+  2. Kopieer een object hierboven en pas id, naam, slug, categorie, beschrijving en imgVoor aan.
      imgAchter is voor alle kaarten hetzelfde gedeelde vel: img/achterkant.png
   3. prijs is altijd 2.50, tenzij het een gepersonaliseerde kaart is (dan 6.00)
-  4. De kaart verschijnt automatisch op kaarten.html en is klikbaar naar kaart-detail.html?id=N
+  4. slug moet uniek zijn (lowercase, geen diakrieten, niet-alfanumeriek naar streepje, geen
+     dubbele/leading/trailing streepjes). De kaart verschijnt automatisch op kaarten.html en
+     krijgt na `node build.js` een eigen statische pagina op /kaarten/<slug>.html
   5. Zet verborgen: true om een kaart tijdelijk uit de winkel te halen zonder hem te verwijderen
+  6. voorraad: null betekent onbeperkt op voorraad. Zet er een getal neer (0, 1, 2, ...) om de
+     voorraad bij te houden. Bij 0 verschijnt "Uitverkocht" en kan de kaart niet besteld worden,
+     bij 1 t/m 3 verschijnt "Nog X".
+  7. Draai na elke wijziging `node build.js` om de statische kaartpagina's en sitemap.xml
+     bij te werken.
 
   LET OP bij de nieuwe kaarten van juli 2026:
   - De ids 20, 29 en 30 zijn bewust overgeslagen. De bijbehorende afbeeldingen in img/

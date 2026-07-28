@@ -1,15 +1,3 @@
-/* ============================================================
-   VERZENDKOSTEN
-   Pas hier de bedragen aan, de rest van de site rekent hiermee.
-   Simpele regel, stand juli 2026: 1 kaart een tarief, 2 of meer
-   kaarten een ander tarief. Daarboven geldt de gratis-drempel.
-   ============================================================ */
-const VERZENDING = {
-  GRATIS_VANAF:      40.00,  // vanaf dit orderbedrag is verzenden gratis
-  EEN_KAART:          1.70,  // verzendkosten bij precies 1 kaart
-  MEERDERE_KAARTEN:   3.00   // verzendkosten bij 2 kaarten of meer
-};
-
 /**
  * Verzendkosten voor een order.
  * @param {number} aantalKaarten  totaal aantal kaarten in het mandje
@@ -29,12 +17,9 @@ function totGratisVerzending(subtotaal) {
 
 /* ============================================================
    BUNDELS
-   losseKaartPrijs is 2,50. In een bundel kost een kaart nooit
-   minder dan 2,00, dat is de ondergrens die Rosalie hanteert.
+   De losse kaartprijs komt uit PRIJZEN.LOS, de ondergrens per kaart
+   uit MIN_KAART_PRIJS_IN_BUNDEL, beide in js/config.js.
    ============================================================ */
-const LOSSE_KAART_PRIJS = 2.50;
-const MIN_KAART_PRIJS_IN_BUNDEL = 2.00;
-
 const bundelData = [
   {
     id: 'set-bemoediging',
@@ -89,7 +74,7 @@ const bundelData = [
 
 /** Wat de kaarten los bij elkaar zouden kosten. */
 function losseSom(bundel) {
-  return bundel.aantalKaarten * LOSSE_KAART_PRIJS;
+  return bundel.aantalKaarten * PRIJZEN.LOS;
 }
 
 /** Kortingspercentage, afgerond op hele procenten. */
@@ -113,7 +98,7 @@ function vindBundel(id) {
   if (typeof kaartData === 'undefined') return;
   bundelData.forEach(b => {
     if (prijsPerKaart(b) < MIN_KAART_PRIJS_IN_BUNDEL) {
-      console.warn(`Bundel "${b.naam}" komt op ${prijsPerKaart(b).toFixed(2)} per kaart, onder de ondergrens van ${MIN_KAART_PRIJS_IN_BUNDEL.toFixed(2)}.`);
+      console.warn(`Bundel "${b.naam}" komt op ${formatEuro(prijsPerKaart(b))} per kaart, onder de ondergrens van ${formatEuro(MIN_KAART_PRIJS_IN_BUNDEL)}.`);
     }
     (b.kaartIds || []).forEach(id => {
       if (!kaartData.find(k => k.id === id)) {

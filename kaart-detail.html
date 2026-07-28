@@ -3,13 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kaartdetail — Maria Studio</title>
-  <meta name="description" content="Kaartdetail — Maria Studio handgemaakte kaarten.">
+  <title>Kaartdetail | Maria Studio</title>
+  <meta name="description" content="Kaartdetail Maria Studio handgemaakte kaarten.">
 
-  <meta property="og:title" content="Kaartdetail — Maria Studio">
+  <meta property="og:title" content="Kaartdetail | Maria Studio">
   <meta property="og:description" content="Handgemaakte kaarten met liefde gemaakt door Rosalie.">
-  <meta property="og:image" content="img/og-image.svg">
+  <!-- TODO: vervang door echte 1200x630 JPG, een SVG werkt niet als og:image -->
+  <meta property="og:image" content="https://maria-studio.nl/img/kaart-4-voor.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://maria-studio.nl/kaart-detail.html">
+  <meta property="og:site_name" content="Maria Studio">
+  <meta property="og:locale" content="nl_NL">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Kaartdetail | Maria Studio">
+  <meta name="twitter:description" content="Handgemaakte kaarten met liefde gemaakt door Rosalie.">
+  <meta name="twitter:image" content="https://maria-studio.nl/img/kaart-4-voor.png">
+  <link rel="canonical" href="https://maria-studio.nl/kaart-detail.html">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,7 +29,7 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
 </head>
-<body>
+<body class="blush-top">
 
   <a href="#main" class="skip-link">Ga naar inhoud</a>
 
@@ -31,17 +42,17 @@
   <!-- FOOTER -->
   <footer class="site-footer" id="site-footer"></footer>
 
-  <script src="js/config.js"></script>
-  <script src="js/kaarten.js"></script>
-  <script src="js/bundels.js"></script>
-  <script src="js/instagram.js"></script>
-  <script src="js/mandje.js"></script>
-  <script src="js/components.js"></script>
+  <script src="js/config.js" defer></script>
+  <script src="js/overlay.js" defer></script>
+  <script src="js/kaarten.js" defer></script>
+  <script src="js/bundels.js" defer></script>
+  <script src="js/instagram.js" defer></script>
+  <script src="js/mandje.js" defer></script>
+  <script src="js/components.js" defer></script>
   <script>
+  (function () {
+    document.addEventListener('DOMContentLoaded', function () {
     function openLightbox(src, alt) {
-      const bestaand = document.querySelector('.lightbox-overlay');
-      if (bestaand) bestaand.remove();
-
       const overlay = document.createElement('div');
       overlay.className = 'lightbox-overlay';
       overlay.setAttribute('role', 'dialog');
@@ -52,6 +63,7 @@
       sluitBtn.className = 'lightbox-sluit';
       sluitBtn.setAttribute('aria-label', 'Sluiten');
       sluitBtn.textContent = '✕';
+      sluitBtn.addEventListener('click', sluitOverlay);
 
       const img = document.createElement('img');
       img.setAttribute('src', src);
@@ -60,13 +72,8 @@
       overlay.appendChild(sluitBtn);
       overlay.appendChild(img);
 
-      overlay.addEventListener('click', e => {
-        if (e.target === overlay || e.target.classList.contains('lightbox-sluit')) {
-          overlay.remove();
-        }
-      });
       document.body.appendChild(overlay);
-      sluitBtn.focus();
+      openOverlay(overlay);
     }
 
     function wisselAfbeelding(src, alt, gekliktElement) {
@@ -92,17 +99,29 @@
         </div>
       `;
     } else {
-      document.title = `${kaart.naam} — Maria Studio`;
+      // Wijst naar de statische kaartpagina, niet naar zichzelf: die is de
+      // echte canonieke URL, kaart-detail.html is alleen nog een fallback
+      // voor oude gedeelde links (zie _redirects).
+      const paginaUrl = `${SITE.URL}/kaarten/${kaart.slug}.html`;
+      const afbeeldingUrl = `${SITE.URL}/${kaart.imgVoor}`;
 
-      // Open Graph dynamisch updaten
-      document.querySelector('meta[property="og:title"]').setAttribute('content', `${kaart.naam} — Maria Studio`);
+      document.title = `${kaart.naam} | ${SITE.NAAM}`;
+
+      // Open Graph dynamisch updaten (absolute URL's, geldt alleen voor crawlers
+      // die JS uitvoeren zoals Googlebot; Facebook/Twitter-linkpreviews lezen
+      // enkel de statische head-tags hierboven, niet deze update)
+      document.querySelector('meta[property="og:title"]').setAttribute('content', `${kaart.naam} | ${SITE.NAAM}`);
       document.querySelector('meta[property="og:description"]').setAttribute('content', kaart.beschrijving);
-      document.querySelector('meta[property="og:image"]').setAttribute('content', kaart.imgVoor);
+      document.querySelector('meta[property="og:image"]').setAttribute('content', afbeeldingUrl);
+      document.querySelector('meta[property="og:url"]').setAttribute('content', paginaUrl);
+      document.querySelector('meta[name="twitter:title"]').setAttribute('content', `${kaart.naam} | ${SITE.NAAM}`);
+      document.querySelector('meta[name="twitter:description"]').setAttribute('content', kaart.beschrijving);
+      document.querySelector('meta[name="twitter:image"]').setAttribute('content', afbeeldingUrl);
 
       // Canonical dynamisch
       let canonical = document.querySelector('link[rel="canonical"]');
       if (!canonical) { canonical = document.createElement('link'); canonical.rel = 'canonical'; document.head.appendChild(canonical); }
-      canonical.href = `kaart-detail.html?id=${kaart.id}`;
+      canonical.href = paginaUrl;
 
       // JSON-LD
       const ld = document.createElement('script');
@@ -117,7 +136,9 @@
           "@type": "Offer",
           "price": kaart.prijs.toFixed(2),
           "priceCurrency": "EUR",
-          "availability": "https://schema.org/InStock"
+          "availability": kaart.voorraad === 0
+            ? "https://schema.org/OutOfStock"
+            : "https://schema.org/InStock"
         }
       });
       document.head.appendChild(ld);
@@ -138,6 +159,8 @@
         </div>
       ` : '';
 
+      const uitverkocht = kaart.voorraad === 0;
+
       inhoud.innerHTML = `
         <section class="detail-section" id="main">
           <div class="detail-grid">
@@ -148,7 +171,8 @@
                 src="${kaart.imgVoor}"
                 alt="Voorkant: ${kaart.naam}"
                 class="detail-main-img"
-                loading="lazy"
+                loading="eager"
+                fetchpriority="high"
                 width="400" height="500"
               >
 
@@ -186,10 +210,11 @@
               <span class="detail-pill ${pillKlasse}">${categorieLabel}</span>
               <h1 class="detail-naam">${kaart.naam}</h1>
 
-              <p class="detail-prijs-groot">&euro; ${kaart.prijs.toFixed(2).replace('.', ',')}</p>
+              <p class="detail-prijs-groot">${formatEuro(kaart.prijs)}</p>
+              ${voorraadBadgeHtml(kaart)}
               <p class="detail-meta">Formaat: ${kaart.formaat}</p>
-              <p class="detail-meta">Verzending: gratis vanaf &euro; 40,00, daaronder &euro; ${euro(VERZENDING.EEN_KAART)}</p>
-              <p class="detail-meta"><a href="bundels.html">Voordeliger in een bundel, vanaf &euro; 2,00 per kaart</a></p>
+              <p class="detail-meta">Verzending: gratis vanaf ${formatEuro(VERZENDING.GRATIS_VANAF)}, daaronder ${formatEuro(VERZENDING.EEN_KAART)}</p>
+              <p class="detail-meta"><a href="bundels.html">Voordeliger in een bundel, vanaf ${formatEuro(MIN_KAART_PRIJS_IN_BUNDEL)} per kaart</a></p>
 
               <hr class="detail-divider">
 
@@ -200,13 +225,13 @@
               <hr class="detail-divider">
 
               <div class="detail-actions">
-                <button class="btn-cart" id="btn-cart-detail">
-                  Voeg toe aan mandje
-                </button>
-                <button class="btn-snel" id="btn-snel-detail">
-                  Snel bestellen
-                </button>
+                ${uitverkocht
+                  ? '<p class="detail-uitverkocht">Tijdelijk uitverkocht</p>'
+                  : '<button class="btn-cart" id="btn-cart-detail">Voeg toe aan mandje</button>'}
               </div>
+              ${uitverkocht ? '' : `
+                <button type="button" class="btn-snel" id="btn-snel-detail">Snel bestellen</button>
+              `}
             </div>
 
           </div>
@@ -214,10 +239,12 @@
       `;
 
       // Event listeners voor actie-knoppen (geen inline onclick)
-      document.getElementById('btn-cart-detail').addEventListener('click', () => voegToeAanMandje(kaart.id));
-      document.getElementById('btn-snel-detail').addEventListener('click', () =>
-        toonBestellingPopup(kaart.naam, kaart.prijs, false)
-      );
+      // Bij voorraad 0 bestaan deze knoppen niet, zie detail-actions hierboven.
+      const cartBtn = document.getElementById('btn-cart-detail');
+      if (cartBtn) cartBtn.addEventListener('click', () => voegToeAanMandje(kaart.id));
+
+      const snelBtn = document.getElementById('btn-snel-detail');
+      if (snelBtn) snelBtn.addEventListener('click', () => toonBestellingPopup(kaart.naam, kaart.prijs, false));
 
       // Thumbnail klikken
       document.querySelectorAll('.detail-thumb').forEach(thumb => {
@@ -241,6 +268,8 @@
         });
       });
     }
+    });
+  })();
   </script>
 </body>
 </html>
