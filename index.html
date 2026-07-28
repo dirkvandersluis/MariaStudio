@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Maria Studio — Handgemaakte kaarten</title>
-  <meta name="description" content="Handgemaakte kaarten met liefde gemaakt door Rosalie. Voor elk moment dat telt. Gratis verzending vanaf 40 euro.">
+  <title>Handgemaakte Christelijke Kaarten | Maria Studio</title>
+  <meta name="description" content="Handgemaakte bemoedigingskaarten en christelijke kaartjes met Bijbeltekst, vol liefde gemaakt door Rosalie. Gratis verzending vanaf 40 euro.">
 
-  <meta property="og:title" content="Maria Studio — Handgemaakte kaarten">
-  <meta property="og:description" content="Handgemaakte kaarten met liefde gemaakt door Rosalie. Voor elk moment dat telt. Gratis verzending vanaf 40 euro.">
+  <meta property="og:title" content="Handgemaakte Christelijke Kaarten | Maria Studio">
+  <meta property="og:description" content="Handgemaakte bemoedigingskaarten en christelijke kaartjes met Bijbeltekst, vol liefde gemaakt door Rosalie. Gratis verzending vanaf 40 euro.">
   <meta property="og:image" content="img/og-image.svg">
   <meta property="og:type" content="website">
   <link rel="canonical" href="index.html">
@@ -36,7 +36,7 @@
         <img src="img/kaart-17-voor.png" alt="" class="hero-kaart hero-kaart--2" width="180" height="225">
         <img src="img/kaart-6-voor.png"  alt="" class="hero-kaart hero-kaart--3" width="180" height="225">
       </div>
-      <h1 class="hero__title fade-up-2">Handgemaakte kaarten, <br>met liefde gemaakt.</h1>
+      <h1 class="hero__title fade-up-2">Handgemaakte christelijke kaarten, <br>met liefde gemaakt.</h1>
       <p class="hero__subtitle fade-up-3">Voor elk moment dat telt. Gratis verzending vanaf &euro; 40,00.</p>
       <a href="kaarten.html" class="hero-link fade-up-3">Bekijk de kaarten &rarr;</a>
       <a href="bundels.html" class="hero-link fade-up-3">Bekijk de bundels &rarr;</a>
@@ -129,6 +129,14 @@
             <span class="card-price">&euro; ${kaart.prijs.toFixed(2).replace('.', ',')}</span>
           </div>
         </a>
+        <button type="button" class="card-add-btn" data-id="${kaart.id}" aria-label="${kaart.naam} toevoegen aan mandje">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <path d="M16 10a4 4 0 01-8 0"/>
+          </svg>
+          In het mandje
+        </button>
       </div>
     `).join('');
 
@@ -138,6 +146,11 @@
         this.style.display = 'none';
         this.closest('.card-img-wrap').style.background = '#E6A69D';
       });
+    });
+
+    // Direct toevoegen aan mandje vanaf de homepage-preview, zonder door te klikken
+    document.querySelectorAll('#kaart-preview .card-add-btn').forEach(btn => {
+      btn.addEventListener('click', () => voegToeAanMandje(parseInt(btn.dataset.id, 10)));
     });
 
     document.querySelectorAll('.hero-kaart').forEach(img => {

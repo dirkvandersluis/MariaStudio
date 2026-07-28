@@ -110,10 +110,10 @@
         </nav>
         <div class="footer-col footer-info">
           <p>Formaat: 10,5 x 14,8 cm (A6)</p>
-          <p>Prijs: &euro; 2,50 per kaart</p>
-          <p>Bundels: vanaf &euro; 2,00 per kaart</p>
+          <p>Prijs: &euro; ${LOSSE_KAART_PRIJS.toFixed(2).replace('.', ',')} per kaart</p>
+          <p>Bundels: vanaf &euro; ${MIN_KAART_PRIJS_IN_BUNDEL.toFixed(2).replace('.', ',')} per kaart</p>
           <p>Gepersonaliseerd: &euro; 6,00</p>
-          <p>Verzending: gratis vanaf &euro; 40,00</p>
+          <p>Verzending: gratis vanaf &euro; ${VERZENDING.GRATIS_VANAF.toFixed(2).replace('.', ',')}</p>
           <!-- KVK-nummer toevoegen zodra ingeschreven -->
         </div>
       </div>
